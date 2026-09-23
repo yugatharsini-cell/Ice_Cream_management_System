@@ -1,7 +1,3 @@
-/* ================================
-   General
-================================ */
-
 * {
     box-sizing: border-box;
 }
@@ -19,9 +15,7 @@ a {
 }
 
 
-/* ================================
-   Navigation Bar
-================================ */
+
 
 .navbar {
     background: #241c28;
@@ -58,10 +52,6 @@ a {
 }
 
 
-/* ================================
-   Main Container
-================================ */
-
 .container {
     width: 90%;
     max-width: 1200px;
@@ -70,11 +60,6 @@ a {
 
     padding: 30px 0 50px;
 }
-
-
-/* ================================
-   Hero Section
-================================ */
 
 .hero {
     background: #30232e;
@@ -107,10 +92,6 @@ a {
 }
 
 
-/* ================================
-   Section Heading
-================================ */
-
 .container > h2 {
     text-align: center;
 
@@ -122,10 +103,6 @@ a {
 }
 
 
-/* ================================
-   Product Grid
-================================ */
-
 .grid {
     display: grid;
 
@@ -136,10 +113,6 @@ a {
     align-items: stretch;
 }
 
-
-/* ================================
-   Product Card
-================================ */
 
 .card {
     background: #242025;
@@ -168,9 +141,6 @@ a {
 }
 
 
-/* ================================
-   Product Images
-================================ */
 
 .product-image {
     width: 100%;
@@ -195,9 +165,6 @@ a {
 }
 
 
-/* ================================
-   Product Text
-================================ */
 
 .card h3 {
     margin: 0 0 10px;
@@ -226,9 +193,6 @@ a {
 }
 
 
-/* ================================
-   Buttons
-================================ */
 
 .actions {
     display: flex;
@@ -299,10 +263,6 @@ a {
 }
 
 
-/* ================================
-   Product Details
-================================ */
-
 .product-details {
     max-width: 600px;
 
@@ -328,9 +288,7 @@ a {
 }
 
 
-/* ================================
-   LOGIN PAGE
-================================ */
+
 
 .login-container {
     width: 100%;
@@ -345,9 +303,6 @@ a {
 
     padding-top: 60px;
 }
-
-
-/* Login Box */
 
 .login-container .form-card {
     width: 450px;
@@ -368,8 +323,6 @@ a {
 }
 
 
-/* Login Heading */
-
 .login-container .form-card h2 {
     text-align: center;
 
@@ -379,16 +332,11 @@ a {
 }
 
 
-/* Login Form */
-
 .login-container .form-card form {
     display: block;
 
     width: 100%;
 }
-
-
-/* Labels */
 
 .login-container .form-card label {
     display: block;
@@ -402,8 +350,6 @@ a {
     color: #e6dce1;
 }
 
-
-/* Input Fields */
 
 .login-container .form-card input {
     display: block;
@@ -438,7 +384,7 @@ a {
 }
 
 
-/* Login Button */
+
 
 .login-container .form-card .btn {
     display: block;
@@ -467,7 +413,6 @@ a {
 }
 
 
-/* Register Link */
 
 .login-container .form-card p {
     text-align: center;
@@ -488,9 +433,6 @@ a {
 }
 
 
-/* ================================
-   Messages
-================================ */
 
 .error {
     background: #3a2024;
@@ -520,10 +462,6 @@ a {
     border: 1px solid #365d42;
 }
 
-
-/* ================================
-   Tables
-================================ */
 
 .table-wrap {
     overflow: auto;
@@ -561,10 +499,6 @@ a {
 }
 
 
-/* ================================
-   Footer
-================================ */
-
 .footer {
     background: #211921;
 
@@ -579,10 +513,6 @@ a {
     border-top: 1px solid #3d3039;
 }
 
-
-/* ================================
-   Mobile Responsive
-================================ */
 
 @media (max-width: 900px) {
 
@@ -650,7 +580,6 @@ a {
         width: 100%;
     }
 
-    /* Login mobile */
 
     .login-container {
         padding-top: 40px;

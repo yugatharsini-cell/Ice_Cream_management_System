@@ -56,11 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
 
-        /*
-        ---------------------------------------
-        1. Create Order
-        ---------------------------------------
-        */
+
 
         $code = 'ORD-' . date('YmdHis') . '-' . random_int(100, 999);
 
@@ -79,12 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $orderId = $pdo->lastInsertId();
 
 
-        /*
-        ---------------------------------------
-        2. Insert Order Items
-        ---------------------------------------
-        */
-
         $oi = $pdo->prepare("
             INSERT INTO order_items
             (order_id, product_id, quantity, price)
@@ -92,11 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ");
 
 
-        /*
-        ---------------------------------------
-        3. Reduce Stock Quantity
-        ---------------------------------------
-        */
+    
 
         $updateStock = $pdo->prepare("
             UPDATE products
@@ -134,11 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
 
-        /*
-        ---------------------------------------
-        4. Create Payment Record
-        ---------------------------------------
-        */
 
         $payment = $pdo->prepare("
             INSERT INTO payments
@@ -153,12 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
 
-        /*
-        ---------------------------------------
-        5. Complete Transaction
-        ---------------------------------------
-        */
-
+    
         $pdo->commit();
 
         // Clear shopping cart

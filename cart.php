@@ -5,18 +5,10 @@ require_once "config/auth.php";
 require_once "config/cart.php";
 
 
-// ===============================
-// Initialize Cart
-// ===============================
-
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-
-// ===============================
-// Handle Cart Actions
-// ===============================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -24,9 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pid = (int) ($_POST['product_id'] ?? 0);
 
 
-    // -------------------------------
-    // Add Product
-    // -------------------------------
 
     if ($action === 'add') {
 
@@ -47,9 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    // -------------------------------
-    // Update Cart
-    // -------------------------------
 
     elseif ($action === 'update') {
 
@@ -70,10 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    // -------------------------------
-    // Remove Product
-    // -------------------------------
-
     elseif ($action === 'remove') {
 
         unset($_SESSION['cart'][$pid]);
@@ -84,10 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-
-// ===============================
-// Get Cart Items
-// ===============================
 
 $items = [];
 $total = 0;
@@ -153,7 +131,7 @@ if ($_SESSION['cart']) {
 <body>
 
 
-    <!-- Navigation -->
+
 
     <nav class="navbar">
 
@@ -168,7 +146,7 @@ if ($_SESSION['cart']) {
     </nav>
 
 
-    <!-- Main Container -->
+   
 
     <div class="container">
 
@@ -179,7 +157,7 @@ if ($_SESSION['cart']) {
 
         <?php if (!$items): ?>
 
-            <!-- Empty Cart -->
+        
 
             <div class="card">
 
@@ -193,7 +171,7 @@ if ($_SESSION['cart']) {
         <?php else: ?>
 
 
-            <!-- Cart Items -->
+         
 
             <form method="post">
 
@@ -242,7 +220,6 @@ if ($_SESSION['cart']) {
                             <tr>
 
 
-                                <!-- Product Image -->
 
                                 <td>
 
@@ -270,7 +247,7 @@ if ($_SESSION['cart']) {
                                 </td>
 
 
-                                <!-- Product Name -->
+                              
 
                                 <td>
 
@@ -281,7 +258,7 @@ if ($_SESSION['cart']) {
                                 </td>
 
 
-                                <!-- Price -->
+                              
 
                                 <td>
 
@@ -294,7 +271,7 @@ if ($_SESSION['cart']) {
                                 </td>
 
 
-                                <!-- Quantity -->
+                         
 
                                 <td>
 
@@ -309,7 +286,6 @@ if ($_SESSION['cart']) {
                                 </td>
 
 
-                                <!-- Line Total -->
 
                                 <td>
 
@@ -322,7 +298,6 @@ if ($_SESSION['cart']) {
                                 </td>
 
 
-                                <!-- Remove -->
 
                                 <td>
 
@@ -357,9 +332,6 @@ if ($_SESSION['cart']) {
 
                 <br>
 
-
-                <!-- Update Cart -->
-
                 <button
                     class="btn"
                     type="submit"
@@ -370,7 +342,7 @@ if ($_SESSION['cart']) {
             </form>
 
 
-            <!-- Cart Total -->
+        
 
             <div class="cart-total">
 
@@ -379,8 +351,6 @@ if ($_SESSION['cart']) {
 
             </div>
 
-
-            <!-- Checkout -->
 
             <?php if (isset($_SESSION['user'])): ?>
 

@@ -6,16 +6,9 @@ require_once "../config/auth.php";
 requireLogin();
 
 
-// ===============================
-// Get Order ID
-// ===============================
-
 $id = (int) ($_GET['id'] ?? 0);
 
 
-// ===============================
-// Get Order Details
-// ===============================
 
 $stmt = $pdo->prepare("
     SELECT
@@ -37,18 +30,12 @@ $stmt->execute([
 $order = $stmt->fetch();
 
 
-// ===============================
-// Check Order
-// ===============================
 
 if (!$order) {
     die("Order not found.");
 }
 
 
-// ===============================
-// Get Order Items
-// ===============================
 
 $stmt = $pdo->prepare("
     SELECT
@@ -91,7 +78,6 @@ $items = $stmt->fetchAll();
 <body>
 
 
-    <!-- Navigation -->
 
     <nav class="navbar">
 
@@ -106,14 +92,14 @@ $items = $stmt->fetchAll();
     </nav>
 
 
-    <!-- Main Container -->
+    >
 
     <div class="container">
 
         <div class="card">
 
 
-            <!-- Order Information -->
+        
 
             <h2>
                 <?= e($order['order_code']) ?>
@@ -134,7 +120,7 @@ $items = $stmt->fetchAll();
             </p>
 
 
-            <!-- Order Items Table -->
+         
 
             <table class="table">
 
@@ -167,7 +153,7 @@ $items = $stmt->fetchAll();
 
                     <tr>
 
-                        <!-- Product Image -->
+                     
 
                         <td>
 
@@ -234,7 +220,7 @@ $items = $stmt->fetchAll();
             </table>
 
 
-            <!-- Order Total -->
+           
 
             <h3>
                 Total:

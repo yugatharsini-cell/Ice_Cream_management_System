@@ -6,16 +6,9 @@ require_once "config/auth.php";
 requireLogin();
 
 
-// ===============================
-// Get Order ID
-// ===============================
-
 $orderId = (int) ($_GET['order_id'] ?? 0);
 
 
-// ===============================
-// Get Order & Payment Details
-// ===============================
 
 $stmt = $pdo->prepare("
     SELECT
@@ -37,10 +30,6 @@ $stmt->execute([
 $order = $stmt->fetch();
 
 
-// ===============================
-// Check Order
-// ===============================
-
 if (!$order) {
     die("Order not found.");
 }
@@ -48,10 +37,6 @@ if (!$order) {
 
 $message = "";
 
-
-// ===============================
-// Process Payment
-// ===============================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -122,8 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    // Failed / Cancelled Payment
-
     $message =
         "Payment $status. You can retry the demo payment.";
 }
@@ -154,8 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 
-    <!-- Navigation -->
-
     <nav class="navbar">
 
         <div class="logo">
@@ -165,16 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
 
-    <!-- Payment Form -->
-
     <div class="form-card">
 
         <h2>
             Online Payment
         </h2>
-
-
-        <!-- Order Information -->
 
         <p>
             Order:
@@ -194,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
 
 
-        <!-- Payment Message -->
 
         <?php if ($message): ?>
 
@@ -207,8 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
 
-        <!-- Demo Payment Notice -->
-
         <p>
 
             This project uses a demo payment process.
@@ -218,12 +191,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
 
 
-        <!-- Payment Buttons -->
-
         <form method="post">
 
-
-            <!-- Successful Payment -->
 
             <button
                 name="result"
@@ -235,8 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
 
 
-            <!-- Failed Payment -->
-
             <button
                 name="result"
                 value="Failed"
@@ -246,8 +213,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Simulate Failed Payment
             </button>
 
-
-            <!-- Cancel Payment -->
 
             <button
                 name="result"

@@ -49,7 +49,7 @@ $imageUrl = get_image_url($p['image'] ?? '', $p['name']);
 
 <body>
 
-    <!-- Navigation Bar -->
+
 
     <nav class="navbar">
 
@@ -72,14 +72,12 @@ $imageUrl = get_image_url($p['image'] ?? '', $p['name']);
     </nav>
 
 
-    <!-- Product Details -->
 
     <div class="container">
 
         <div class="card product-details">
 
 
-            <!-- Individual Product Image -->
 
             <img
                 src="<?= e($imageUrl) ?>"
@@ -88,21 +86,15 @@ $imageUrl = get_image_url($p['image'] ?? '', $p['name']);
             >
 
 
-            <!-- Product Name -->
 
             <h1>
                 <?= e($p['name']) ?>
             </h1>
 
-
-            <!-- Description -->
-
             <p>
                 <?= e($p['description']) ?>
             </p>
 
-
-            <!-- Category -->
 
             <p>
                 Category:
@@ -110,14 +102,10 @@ $imageUrl = get_image_url($p['image'] ?? '', $p['name']);
             </p>
 
 
-            <!-- Price -->
-
             <p class="price">
                 Rs. <?= number_format($p['price'], 2) ?>
             </p>
 
-
-            <!-- Add to Cart -->
 
             <form
                 method="post"
@@ -152,4 +140,4 @@ $imageUrl = get_image_url($p['image'] ?? '', $p['name']);
 </body>
 
 </html>
-```
+

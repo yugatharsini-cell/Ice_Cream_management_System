@@ -6,20 +6,12 @@ require_once "config/auth.php";
 $error = "";
 
 
-// ===============================
-// Handle Registration
-// ===============================
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-
-    // ===============================
-    // Validate Input
-    // ===============================
 
     if (
         $name === '' ||
@@ -32,10 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
 
-
-        // ===============================
-        // Check Existing Email
-        // ===============================
 
         $check = $pdo->prepare("
             SELECT id
@@ -53,9 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
 
 
-            // ===============================
-            // Create Customer Account
-            // ===============================
 
             $hash = password_hash(
                 $password,
@@ -77,9 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
 
-            // ===============================
-            // Redirect to Login
-            // ===============================
 
             header(
                 "Location: login.php?registered=1"
@@ -116,8 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 
-    <!-- Navigation -->
-
     <nav class="navbar">
 
         <div class="logo">
@@ -131,16 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
 
-    <!-- Registration Form -->
-
     <div class="form-card">
 
         <h2>
             Create Account
         </h2>
 
-
-        <!-- Error Message -->
 
         <?php if ($error): ?>
 
@@ -153,12 +129,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
 
-        <!-- Registration Form -->
-
         <form method="post">
 
 
-            <!-- Name -->
 
             <label>
                 Name
@@ -170,9 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 required
             >
 
-
-            <!-- Email -->
-
             <label>
                 Email
             </label>
@@ -183,8 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 required
             >
 
-
-            <!-- Password -->
 
             <label>
                 Password
@@ -201,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <br>
 
 
-            <!-- Register Button -->
+
 
             <button
                 type="submit"
@@ -213,8 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </form>
 
-
-        <!-- Login Link -->
 
         <p>
 

@@ -6,10 +6,6 @@ require_once "../config/auth.php";
 requireLogin();
 
 
-// ===============================
-// Get Customer Orders
-// ===============================
-
 $stmt = $pdo->prepare("
     SELECT *
     FROM orders
@@ -49,7 +45,7 @@ $orders = $stmt->fetchAll();
 <body>
 
 
-    <!-- Navigation -->
+
 
     <nav class="navbar">
 
@@ -64,7 +60,7 @@ $orders = $stmt->fetchAll();
     </nav>
 
 
-    <!-- Main Container -->
+
 
     <div class="container">
 
@@ -73,7 +69,6 @@ $orders = $stmt->fetchAll();
         </h1>
 
 
-        <!-- Orders Table -->
 
         <div class="table-wrap">
 
@@ -108,21 +103,17 @@ $orders = $stmt->fetchAll();
 
                     <tr>
 
-                        <!-- Order Code -->
 
                         <td>
                             <?= e($order['order_code']) ?>
                         </td>
 
 
-                        <!-- Order Date -->
+                       
 
                         <td>
                             <?= e($order['order_date']) ?>
                         </td>
-
-
-                        <!-- Total -->
 
                         <td>
                             Rs.
@@ -140,7 +131,7 @@ $orders = $stmt->fetchAll();
                         </td>
 
 
-                        <!-- View Order -->
+                        
 
                         <td>
 

@@ -50,29 +50,17 @@ function require_admin()
 }
 
 
-// Same function with camelCase
-// This supports pages that use requireAdmin()
+
 function requireAdmin()
 {
     require_admin();
 }
 
-
-/**
- * Resolves the user's product image URL or path.
- * Strictly uses whatever image URL or file the user provided.
- * 
- * Handles:
- * 1. Full Web URLs (https://... or http://...)
- * 2. Paths with assets/ (assets/images/...)
- * 3. File names in assets/images/ (ClassicVanilla.jpg)
- * 4. Automatic subdirectory prefix (admin/ vs root)
- */
 function get_image_url($image, $name = '')
 {
     $image = trim($image ?? '');
 
-    // 1. If empty, fallback to local filename in assets/images/ matching product name
+    
     if ($image === '') {
         $nameMap = [
             'Classic Vanilla'  => 'ClassicVanilla.jpg',
@@ -86,16 +74,15 @@ function get_image_url($image, $name = '')
             return '';
         }
     }
-
-    // 2. Full web URL or data URI -> return directly as-is
+s
     if (preg_match('#^(https?:)?//#i', $image) || strpos($image, 'data:image') === 0) {
         return $image;
     }
 
-    // 3. Normalize Windows backslashes
+    
     $image = str_replace('\\', '/', $image);
 
-    // 4. Check if calling script is in a subdirectory (admin, customer)
+    
     $isSubdir = false;
     if (isset($_SERVER['SCRIPT_FILENAME'])) {
         $scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
@@ -103,12 +90,11 @@ function get_image_url($image, $name = '')
     }
     $basePrefix = $isSubdir ? '../' : '';
 
-    // 5. If it starts with /ice_cream_shop/
+    
     if (strpos($image, '/ice_cream_shop/') === 0) {
         $image = substr($image, strlen('/ice_cream_shop/'));
     }
 
-    // 6. If it already starts with assets/
     if (strpos($image, 'assets/') === 0) {
         return $basePrefix . $image;
     }
@@ -116,7 +102,6 @@ function get_image_url($image, $name = '')
         return $basePrefix . ltrim($image, '/');
     }
 
-    // 7. If it's just a file name (e.g. ClassicVanilla.jpg)
     return $basePrefix . 'assets/images/' . ltrim($image, '/');
 }
 
