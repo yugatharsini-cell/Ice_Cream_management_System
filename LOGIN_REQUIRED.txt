@@ -1,0 +1,15 @@
+LOGIN-REQUIRED VERSION
+
+Copy the ice_cream_shop folder to:
+C:\xampp\htdocs\
+
+Start Apache and MySQL.
+
+Open:
+http://localhost/ice_cream_shop/
+
+Not logged in -> Login page
+Register -> Login -> Home
+Customer login -> Home
+Admin login -> Home, then use the Admin link
+Logout -> Login page

@@ -1,0 +1,666 @@
+/* ================================
+   General
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #18151a;
+    color: #eeeeee;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ================================
+   Navigation Bar
+================================ */
+
+.navbar {
+    background: #241c28;
+    padding: 18px 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #3d3142;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #eeeeee;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #f3a9c8;
+}
+
+
+/* ================================
+   Main Container
+================================ */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 30px 0 50px;
+}
+
+
+/* ================================
+   Hero Section
+================================ */
+
+.hero {
+    background: #30232e;
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    margin-bottom: 40px;
+
+    border: 1px solid #493747;
+}
+
+.hero h1 {
+    margin: 0 0 12px;
+
+    font-size: 38px;
+
+    color: #f3a9c8;
+}
+
+.hero p {
+    margin: 0;
+
+    font-size: 17px;
+
+    color: #c8bbc2;
+}
+
+
+/* ================================
+   Section Heading
+================================ */
+
+.container > h2 {
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    font-size: 30px;
+
+    color: #f0a4c5;
+}
+
+
+/* ================================
+   Product Grid
+================================ */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* ================================
+   Product Card
+================================ */
+
+.card {
+    background: #242025;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    border: 1px solid #39313a;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 500px;
+
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.50);
+}
+
+
+/* ================================
+   Product Images
+================================ */
+
+.product-image {
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 12px;
+
+    margin-bottom: 18px;
+
+    background: #352934;
+
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.card:hover .product-image {
+    transform: scale(1.03);
+}
+
+
+/* ================================
+   Product Text
+================================ */
+
+.card h3 {
+    margin: 0 0 10px;
+
+    font-size: 22px;
+
+    color: #f0a4c5;
+}
+
+.card p {
+    margin: 7px 0;
+
+    line-height: 1.5;
+
+    color: #d0c6cc;
+}
+
+.price {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #f3a0c2;
+
+    margin-top: 12px !important;
+}
+
+
+/* ================================
+   Buttons
+================================ */
+
+.actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    align-items: center;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.btn {
+    display: inline-block;
+
+    padding: 11px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #9b587e;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.btn:hover {
+    background: #b36b93;
+}
+
+.btn.secondary {
+    background: #76506a;
+}
+
+.btn.secondary:hover {
+    background: #9b587e;
+}
+
+.btn.danger {
+    background: #a94450;
+}
+
+.btn.danger:hover {
+    background: #c75460;
+}
+
+.btn.light {
+    background: #39343a;
+
+    color: #eeeeee;
+}
+
+.btn.light:hover {
+    background: #4a434b;
+}
+
+
+/* ================================
+   Product Details
+================================ */
+
+.product-details {
+    max-width: 600px;
+
+    margin: 30px auto;
+
+    background: #242025;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid #39313a;
+}
+
+.product-details .product-image {
+    width: 100%;
+
+    height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+}
+
+
+/* ================================
+   LOGIN PAGE
+================================ */
+
+.login-container {
+    width: 100%;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding-top: 60px;
+}
+
+
+/* Login Box */
+
+.login-container .form-card {
+    width: 450px;
+
+    max-width: 90%;
+
+    margin: 0 auto;
+
+    background: #242025;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    border: 1px solid #39313a;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
+}
+
+
+/* Login Heading */
+
+.login-container .form-card h2 {
+    text-align: center;
+
+    color: #f0a4c5;
+
+    margin: 0 0 25px;
+}
+
+
+/* Login Form */
+
+.login-container .form-card form {
+    display: block;
+
+    width: 100%;
+}
+
+
+/* Labels */
+
+.login-container .form-card label {
+    display: block;
+
+    width: 100%;
+
+    margin: 15px 0 6px;
+
+    font-weight: bold;
+
+    color: #e6dce1;
+}
+
+
+/* Input Fields */
+
+.login-container .form-card input {
+    display: block;
+
+    width: 100%;
+
+    height: 45px;
+
+    margin: 0 0 15px;
+
+    padding: 10px;
+
+    border: 1px solid #514650;
+
+    border-radius: 7px;
+
+    background: #19171b;
+
+    color: #eeeeee;
+
+    font-size: 15px;
+}
+
+.login-container .form-card input:focus {
+    outline: none;
+
+    border-color: #b36b93;
+}
+
+.login-container .form-card input::placeholder {
+    color: #898088;
+}
+
+
+/* Login Button */
+
+.login-container .form-card .btn {
+    display: block;
+
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #9b587e;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.login-container .form-card .btn:hover {
+    background: #b36b93;
+}
+
+
+/* Register Link */
+
+.login-container .form-card p {
+    text-align: center;
+
+    color: #d0c6cc;
+
+    margin-top: 20px;
+}
+
+.login-container .form-card p a {
+    color: #f0a4c5;
+
+    font-weight: bold;
+}
+
+.login-container .form-card p a:hover {
+    color: #b36b93;
+}
+
+
+/* ================================
+   Messages
+================================ */
+
+.error {
+    background: #3a2024;
+
+    color: #ffb3b3;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    margin: 10px 0;
+
+    border: 1px solid #66363c;
+}
+
+.success {
+    background: #203629;
+
+    color: #a9e5b9;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    margin: 10px 0;
+
+    border: 1px solid #365d42;
+}
+
+
+/* ================================
+   Tables
+================================ */
+
+.table-wrap {
+    overflow: auto;
+
+    background: #242025;
+
+    border-radius: 10px;
+
+    border: 1px solid #39313a;
+}
+
+.table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+
+    border-bottom: 1px solid #3a333b;
+
+    text-align: left;
+}
+
+.table th {
+    background: #30252e;
+
+    color: #f0bfd4;
+}
+
+.table td {
+    color: #ddd5da;
+}
+
+
+/* ================================
+   Footer
+================================ */
+
+.footer {
+    background: #211921;
+
+    color: #d6ccd1;
+
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 30px;
+
+    border-top: 1px solid #3d3039;
+}
+
+
+/* ================================
+   Mobile Responsive
+================================ */
+
+@media (max-width: 900px) {
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .navbar {
+        padding: 15px 25px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 30px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .card {
+        min-height: auto;
+    }
+
+    .product-image {
+        height: 230px;
+    }
+
+    .actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .actions .btn {
+        width: 100%;
+    }
+
+    /* Login mobile */
+
+    .login-container {
+        padding-top: 40px;
+    }
+
+    .login-container .form-card {
+        width: 90%;
+
+        max-width: 450px;
+
+        padding: 25px;
+    }
+}
