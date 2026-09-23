@@ -6,10 +6,6 @@ require_once "../config/auth.php";
 requireAdmin();
 
 
-// ===============================
-// Get Customers
-// ===============================
-
 $users = $pdo
     ->query("
         SELECT
@@ -46,8 +42,6 @@ $users = $pdo
 <body>
 
 
-    <!-- Navigation -->
-
     <nav class="navbar">
 
         <div class="logo">
@@ -61,12 +55,10 @@ $users = $pdo
     </nav>
 
 
-    <!-- Main Container -->
+
 
     <div class="container">
 
-
-        <!-- Customers Table -->
 
         <div class="table-wrap">
 

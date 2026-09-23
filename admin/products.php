@@ -4,9 +4,7 @@ require_once "../config/auth.php";
 
 requireAdmin();
 
-/* =========================
-   DELETE PRODUCT
-========================= */
+
 if (isset($_GET['delete'])) {
 
     $id = (int)$_GET['delete'];
@@ -24,9 +22,7 @@ if (isset($_GET['delete'])) {
 }
 
 
-/* =========================
-   ADD / UPDATE PRODUCT
-========================= */
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $id    = (int)($_POST['id'] ?? 0);
@@ -37,18 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $img   = trim($_POST['image'] ?? '');
     $av    = isset($_POST['availability']) ? 1 : 0;
 
-    /* Stock Quantity */
     $stock = (int)($_POST['stock_quantity'] ?? 0);
 
-    /* Prevent negative stock */
+    
     if ($stock < 0) {
         $stock = 0;
     }
 
 
-    /* =========================
-       UPDATE PRODUCT
-    ========================= */
+   
     if ($id) {
 
         $st = $pdo->prepare("
@@ -78,9 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    /* =========================
-       INSERT NEW PRODUCT
-    ========================= */
+   
     else {
 
         $st = $pdo->prepare("
@@ -113,9 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-/* =========================
-   GET PRODUCT FOR EDIT
-========================= */
+
 $edit = null;
 
 if (isset($_GET['edit'])) {
@@ -134,9 +123,7 @@ if (isset($_GET['edit'])) {
 }
 
 
-/* =========================
-   GET CATEGORIES
-========================= */
+
 $cats = $pdo->query("
     SELECT *
     FROM categories
@@ -144,9 +131,7 @@ $cats = $pdo->query("
 ")->fetchAll();
 
 
-/* =========================
-   GET PRODUCTS
-========================= */
+
 $products = $pdo->query("
     SELECT
         p.*,
@@ -176,9 +161,7 @@ $products = $pdo->query("
 <body>
 
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+
 
 <nav class="navbar">
 
@@ -208,9 +191,7 @@ $products = $pdo->query("
 <div class="container">
 
 
-<!-- =========================
-     PRODUCT FORM
-========================= -->
+
 
 <div class="form-card">
 
@@ -221,7 +202,7 @@ $products = $pdo->query("
 
     <form method="post">
 
-        <!-- Product ID -->
+        
 
         <input
             type="hidden"
@@ -230,7 +211,6 @@ $products = $pdo->query("
         >
 
 
-        <!-- NAME -->
 
         <label>
             Name
@@ -244,7 +224,7 @@ $products = $pdo->query("
         >
 
 
-        <!-- DESCRIPTION -->
+       
 
         <label>
             Description
@@ -256,7 +236,7 @@ $products = $pdo->query("
         ><?= e($edit['description'] ?? '') ?></textarea>
 
 
-        <!-- IMAGE -->
+        
 
         <label>
             Image (URL or Filename)
@@ -269,7 +249,7 @@ $products = $pdo->query("
         >
 
 
-        <!-- IMAGE PREVIEW -->
+        
 
         <?php if (!empty($edit['image'])): ?>
 
@@ -308,8 +288,7 @@ $products = $pdo->query("
         <?php endif; ?>
 
 
-        <!-- PRICE -->
-
+     
         <label>
             Price (Rs.)
         </label>
@@ -325,7 +304,7 @@ $products = $pdo->query("
         >
 
 
-        <!-- CATEGORY -->
+       
 
         <label>
             Category
@@ -353,9 +332,7 @@ $products = $pdo->query("
         </select>
 
 
-        <!-- =========================
-             STOCK QUANTITY
-        ========================== -->
+    
 
         <label>
             Stock Quantity
@@ -380,7 +357,7 @@ $products = $pdo->query("
         </small>
 
 
-        <!-- AVAILABILITY -->
+       
 
         <label
             style="
@@ -407,7 +384,7 @@ $products = $pdo->query("
         </label>
 
 
-        <!-- SAVE BUTTON -->
+       
 
         <button
             type="submit"
@@ -446,9 +423,7 @@ $products = $pdo->query("
 
 
 
-<!-- =========================
-     PRODUCT TABLE
-========================= -->
+
 
 <div class="table-wrap">
 
@@ -498,7 +473,7 @@ $products = $pdo->query("
             <tr>
 
 
-                <!-- IMAGE -->
+               
 
                 <td>
 
@@ -527,7 +502,7 @@ $products = $pdo->query("
                 </td>
 
 
-                <!-- NAME -->
+             
 
                 <td>
 
@@ -538,7 +513,6 @@ $products = $pdo->query("
                 </td>
 
 
-                <!-- CATEGORY -->
 
                 <td>
 
@@ -546,8 +520,6 @@ $products = $pdo->query("
 
                 </td>
 
-
-                <!-- PRICE -->
 
                 <td>
 
@@ -560,7 +532,6 @@ $products = $pdo->query("
                 </td>
 
 
-                <!-- STOCK -->
 
                 <td>
 
@@ -591,7 +562,7 @@ $products = $pdo->query("
                 </td>
 
 
-                <!-- AVAILABILITY -->
+               
 
                 <td>
 
@@ -611,8 +582,6 @@ $products = $pdo->query("
 
                 </td>
 
-
-                <!-- ACTIONS -->
 
                 <td>
 

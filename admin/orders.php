@@ -3,7 +3,7 @@ require_once "../config/db.php";
 require_once "../config/auth.php";
 requireAdmin();
 
-// Handle status update
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['status'])) {
     $orderId = (int)$_POST['order_id'];
     $status  = trim($_POST['status']);

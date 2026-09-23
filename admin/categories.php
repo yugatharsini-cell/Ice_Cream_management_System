@@ -6,10 +6,6 @@ require_once "../config/auth.php";
 requireAdmin();
 
 
-// ===============================
-// Delete Category
-// ===============================
-
 if (isset($_GET['delete'])) {
 
     $categoryId = (int) $_GET['delete'];
@@ -21,7 +17,7 @@ if (isset($_GET['delete'])) {
     try {
         $stmt->execute([$categoryId]);
     } catch (Exception $e) {
-        // Ignore delete error
+        
     }
 
     header("Location: categories.php");
@@ -29,9 +25,6 @@ if (isset($_GET['delete'])) {
 }
 
 
-// ===============================
-// Add Category
-// ===============================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -46,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stmt->execute([$name]);
         } catch (Exception $e) {
-            // Ignore insert error
+            
         }
     }
 
@@ -55,9 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-// ===============================
-// Get Categories
-// ===============================
 
 $cats = $pdo
     ->query("SELECT * FROM categories ORDER BY name")
@@ -86,7 +76,7 @@ $cats = $pdo
 <body>
 
 
-    <!-- Navigation -->
+    
 
     <nav class="navbar">
 
@@ -101,12 +91,10 @@ $cats = $pdo
     </nav>
 
 
-    <!-- Main Container -->
 
     <div class="container">
 
 
-        <!-- Add Category Form -->
 
         <div class="form-card">
 
@@ -136,7 +124,6 @@ $cats = $pdo
         </div>
 
 
-        <!-- Categories Table -->
 
         <div class="table-wrap">
 

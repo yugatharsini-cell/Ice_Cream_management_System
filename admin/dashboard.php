@@ -5,12 +5,6 @@ require_once "../config/auth.php";
 
 requireAdmin();
 
-
-// ===============================
-// Dashboard Statistics
-// ===============================
-
-// Total Customers
 $users = $pdo
     ->query("
         SELECT COUNT(*) AS c
@@ -19,8 +13,6 @@ $users = $pdo
     ")
     ->fetch()['c'];
 
-
-// Total Products
 $products = $pdo
     ->query("
         SELECT COUNT(*) AS c
@@ -28,8 +20,6 @@ $products = $pdo
     ")
     ->fetch()['c'];
 
-
-// Total Orders
 $orders = $pdo
     ->query("
         SELECT COUNT(*) AS c
@@ -37,8 +27,6 @@ $orders = $pdo
     ")
     ->fetch()['c'];
 
-
-// Successful Payments
 $payments = $pdo
     ->query("
         SELECT COUNT(*) AS c
@@ -72,8 +60,6 @@ $payments = $pdo
 
 <body>
 
-
-    <!-- Navigation -->
 
     <nav class="navbar">
 
@@ -112,8 +98,6 @@ $payments = $pdo
     </nav>
 
 
-    <!-- Main Container -->
-
     <div class="container">
 
         <h1>
@@ -121,12 +105,8 @@ $payments = $pdo
         </h1>
 
 
-        <!-- Dashboard Cards -->
-
         <div class="grid">
 
-
-            <!-- Customers -->
 
             <div class="card">
 
@@ -141,8 +121,6 @@ $payments = $pdo
             </div>
 
 
-            <!-- Products -->
-
             <div class="card">
 
                 <h3>
@@ -156,7 +134,7 @@ $payments = $pdo
             </div>
 
 
-            <!-- Orders -->
+          
 
             <div class="card">
 
@@ -171,7 +149,7 @@ $payments = $pdo
             </div>
 
 
-            <!-- Successful Payments -->
+            
 
             <div class="card">
 

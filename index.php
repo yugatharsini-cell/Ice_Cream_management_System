@@ -11,8 +11,6 @@ require_once "config/db.php";
 require_once "config/cart.php"; 
 
 
-/* Get available products */ 
-
 $stmt = $pdo->query(" 
     SELECT 
         p.*, 
@@ -43,9 +41,6 @@ $products = $stmt->fetchAll();
 
     <style>
 
-        /* ================================
-           Footer
-        ================================= */
 
         .footer {
             background: #211a20;
@@ -87,8 +82,6 @@ $products = $stmt->fetchAll();
             font-size: 14px;
         }
 
-        /* Mobile View */
-
         @media (max-width: 768px) {
 
             .footer-container {
@@ -104,11 +97,6 @@ $products = $stmt->fetchAll();
 
 
 <body> 
-
-
-<!-- ================================ 
-     Navigation Bar 
-================================ --> 
 
 <nav class="navbar"> 
 
@@ -151,14 +139,8 @@ $products = $stmt->fetchAll();
 
 
 
-<!-- ================================ 
-     Main Content 
-================================ --> 
-
 <div class="container"> 
 
-
-    <!-- Hero Section --> 
 
     <section class="hero"> 
 
@@ -173,9 +155,6 @@ $products = $stmt->fetchAll();
     </section> 
 
 
-
-    <!-- Products Section --> 
-
     <h2> 
         Our Products 
     </h2> 
@@ -187,11 +166,7 @@ $products = $stmt->fetchAll();
         <?php foreach ($products as $p): ?> 
 
             <div class="card"> 
-
-
-                <!-- ================================= 
-                     AVAILABLE STOCK 
-                ================================== --> 
+ 
 
                 <?php if ((int)$p['stock_quantity'] > 0): ?> 
 
@@ -225,11 +200,6 @@ $products = $stmt->fetchAll();
                 <?php endif; ?> 
 
 
-
-                <!-- ================================= 
-                     Product Image 
-                ================================== --> 
-
                 <a 
                     href="product.php?id=<?= $p['id'] ?>" 
                     style=" 
@@ -250,12 +220,6 @@ $products = $stmt->fetchAll();
 
                 </a> 
 
-
-
-                <!-- ================================= 
-                     Product Name 
-                ================================== --> 
-
                 <h3> 
 
                     <a 
@@ -273,22 +237,12 @@ $products = $stmt->fetchAll();
                 </h3> 
 
 
-
-                <!-- ================================= 
-                     Description 
-                ================================== --> 
-
                 <p> 
 
                     <?= htmlspecialchars($p['description']) ?> 
 
                 </p> 
 
-
-
-                <!-- ================================= 
-                     Category 
-                ================================== --> 
 
                 <p> 
 
@@ -300,22 +254,13 @@ $products = $stmt->fetchAll();
 
 
 
-                <!-- ================================= 
-                     Price 
-                ================================== --> 
-
                 <p class="price"> 
 
                     Rs. 
                     <?= number_format($p['price'], 2) ?> 
 
                 </p> 
-
-
-
-                <!-- ================================= 
-                     Add to Cart 
-                ================================== --> 
+ 
 
                 <div class="actions"> 
 
@@ -382,16 +327,11 @@ $products = $stmt->fetchAll();
 
 
 
-<!-- ================================
-     Footer
-================================ -->
 
 <footer class="footer">
 
     <div class="footer-container">
 
-
-        <!-- Shop Information -->
 
         <div class="footer-section">
 
@@ -408,8 +348,6 @@ $products = $stmt->fetchAll();
 
         </div>
 
-
-        <!-- Contact Information -->
 
         <div class="footer-section">
 
@@ -432,8 +370,6 @@ $products = $stmt->fetchAll();
 
         </div>
 
-
-        <!-- Opening Hours -->
 
         <div class="footer-section">
 
@@ -460,8 +396,6 @@ $products = $stmt->fetchAll();
 
     </div>
 
-
-    <!-- Copyright -->
 
     <div class="footer-bottom">
 
