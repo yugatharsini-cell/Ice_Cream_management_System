@@ -6,18 +6,27 @@ require_once "config/auth.php";
 requireLogin();
 
 
-$orderId = (int) ($_GET['order_id'] ?? 0);
+// Get order ID
+$orderId = (int)($_GET['order_id'] ?? 0);
+
+if ($orderId <= 0) {
+    die("Invalid order.");
+}
 
 
-
+// Get order + customer details
 $stmt = $pdo->prepare("
     SELECT
         o.*,
         p.id AS payment_id,
-        p.payment_status
+        p.payment_status,
+        u.name AS customer_name,
+        u.email AS customer_email
     FROM orders o
     JOIN payments p
         ON p.order_id = o.id
+    JOIN users u
+        ON u.id = o.customer_id
     WHERE o.id = ?
       AND o.customer_id = ?
 ");
@@ -29,86 +38,18 @@ $stmt->execute([
 
 $order = $stmt->fetch();
 
-
 if (!$order) {
     die("Order not found.");
 }
 
 
-$message = "";
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $result = $_POST['result'] ?? 'Failed';
-
-
-    // Allow only valid payment statuses
-
-    $status = in_array(
-        $result,
-        ['Successful', 'Failed', 'Cancelled'],
-        true
-    )
-        ? $result
-        : 'Failed';
-
-
-    // Generate Transaction Reference
-
-    $ref = null;
-
-    if ($status === 'Successful') {
-
-        $ref =
-            'TXN-' .
-            date('YmdHis') .
-            '-' .
-            random_int(1000, 9999);
-    }
-
-
-    // Update Payment
-
-    $stmt = $pdo->prepare("
-        UPDATE payments
-        SET
-            payment_status = ?,
-            transaction_reference = ?,
-            payment_datetime = NOW()
-        WHERE id = ?
-    ");
-
-    $stmt->execute([
-        $status,
-        $ref,
-        $order['payment_id']
-    ]);
-
-
-    // Successful Payment
-
-    if ($status === 'Successful') {
-
-        $stmt = $pdo->prepare("
-            UPDATE orders
-            SET status = 'Confirmed'
-            WHERE id = ?
-        ");
-
-        $stmt->execute([$orderId]);
-
-
-        header(
-            "Location: customer/order_details.php?id=" . $orderId
-        );
-
-        exit;
-    }
-
-
-    $message =
-        "Payment $status. You can retry the demo payment.";
+// If payment is already successful
+if ($order['payment_status'] === 'Successful') {
+    header(
+        "Location: payment_return.php?order_id=" .
+        $orderId
+    );
+    exit;
 }
 
 ?>
@@ -134,100 +75,150 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 
+
 <body>
 
 
-    <nav class="navbar">
+<nav class="navbar">
 
-        <div class="logo">
-            🍦 Ice Cream Shop
-        </div>
-
-    </nav>
-
-
-    <div class="form-card">
-
-        <h2>
-            Online Payment
-        </h2>
-
-        <p>
-            Order:
-            <?= e($order['order_code']) ?>
-        </p>
-
-
-        <p>
-
-            Amount:
-
-            <strong>
-                Rs.
-                <?= number_format($order['total'], 2) ?>
-            </strong>
-
-        </p>
-
-
-
-        <?php if ($message): ?>
-
-            <div class="error">
-
-                <?= e($message) ?>
-
-            </div>
-
-        <?php endif; ?>
-
-
-        <p>
-
-            This project uses a demo payment process.
-            Connect a real gateway only when its merchant
-            credentials and API requirements are available.
-
-        </p>
-
-
-        <form method="post">
-
-
-            <button
-                name="result"
-                value="Successful"
-                class="btn"
-                type="submit"
-            >
-                Pay Successfully
-            </button>
-
-
-            <button
-                name="result"
-                value="Failed"
-                class="btn danger"
-                type="submit"
-            >
-                Simulate Failed Payment
-            </button>
-
-
-            <button
-                name="result"
-                value="Cancelled"
-                class="btn light"
-                type="submit"
-            >
-                Cancel
-            </button>
-
-
-        </form>
-
-
+    <div class="logo">
+        🍦 Ice Cream Shop
     </div>
+
+</nav>
+
+
+<div class="form-card">
+
+    <h2>Online Payment</h2>
+
+
+    <p>
+
+        Order:
+
+        <strong>
+            <?= e($order['order_code']) ?>
+        </strong>
+
+    </p>
+
+
+    <p>
+
+        Amount:
+
+        <strong>
+            Rs.
+            <?= number_format(
+                $order['total'],
+                2
+            ) ?>
+        </strong>
+
+    </p>
+
+
+    <hr>
+
+
+    <h3>Payment Details</h3>
+
+
+    <form
+        method="post"
+        action="payment_process.php"
+    >
+
+
+        <input
+            type="hidden"
+            name="order_id"
+            value="<?= e($orderId) ?>"
+        >
+
+
+        <label>
+            Card Holder Name
+        </label>
+
+        <input
+            type="text"
+            name="card_name"
+            placeholder="Enter card holder name"
+            required
+        >
+
+
+        <label>
+            Card Number
+        </label>
+
+        <input
+            type="text"
+            name="card_number"
+            placeholder="4111 1111 1111 1111"
+            maxlength="19"
+            required
+        >
+
+
+        <label>
+            Expiry Date
+        </label>
+
+        <input
+            type="text"
+            name="expiry"
+            placeholder="MM/YY"
+            maxlength="5"
+            required
+        >
+
+
+        <label>
+            CVV
+        </label>
+
+        <input
+            type="password"
+            name="cvv"
+            placeholder="123"
+            maxlength="3"
+            required
+        >
+
+
+        <br>
+
+
+        <button
+            type="submit"
+            class="btn"
+        >
+            Pay Rs. <?= number_format(
+                $order['total'],
+                2
+            ) ?>
+        </button>
+
+
+    </form>
+
+
+    <p style="margin-top: 15px; font-size: 14px;">
+
+        <strong>Demo Payment</strong>
+
+        <br>
+
+        This is a simulated online payment
+        for the academic project.
+
+    </p>
+
+
+</div>
 
 
 </body>

@@ -1,5 +1,13 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -7,6 +15,7 @@ body {
     font-family: Arial, sans-serif;
     background: #18151a;
     color: #eeeeee;
+    line-height: 1.5;
 }
 
 a {
@@ -14,37 +23,55 @@ a {
     color: inherit;
 }
 
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
 
 
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 .navbar {
     background: #241c28;
-    padding: 18px 50px;
+    padding: 16px 50px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     border-bottom: 1px solid #3d3142;
-
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+    z-index: 10;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 23px;
     font-weight: bold;
-    color: white;
+    color: #ffffff;
+    white-space: nowrap;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .nav-links a {
     color: #eeeeee;
     font-weight: 600;
+    transition: 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -52,73 +79,83 @@ a {
 }
 
 
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
 .container {
     width: 90%;
     max-width: 1200px;
-
     margin: 0 auto;
-
     padding: 30px 0 50px;
 }
 
+
+/* =========================================================
+   HERO
+========================================================= */
+
 .hero {
     background: #30232e;
-
     padding: 45px 30px;
-
     text-align: center;
-
     border-radius: 18px;
-
     margin-bottom: 40px;
-
     border: 1px solid #493747;
 }
 
 .hero h1 {
     margin: 0 0 12px;
-
     font-size: 38px;
-
     color: #f3a9c8;
 }
 
 .hero p {
     margin: 0;
-
     font-size: 17px;
-
     color: #c8bbc2;
 }
 
 
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.container > h1,
 .container > h2 {
-    text-align: center;
-
-    margin-bottom: 30px;
-
-    font-size: 30px;
-
     color: #f0a4c5;
 }
 
+.container > h1 {
+    margin-bottom: 25px;
+}
+
+.container > h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .grid {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 25px;
-
     align-items: stretch;
 }
 
 
+/* =========================================================
+   GENERAL CARD
+========================================================= */
+
 .card {
     background: #242025;
-
     border-radius: 16px;
-
     padding: 18px;
 
     border: 1px solid #39313a;
@@ -126,83 +163,81 @@ a {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
 
     display: flex;
-
     flex-direction: column;
 
-    min-height: 500px;
-
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-
+    transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.50);
 }
 
 
+/* Product cards only */
+
+.grid .card {
+    min-height: 500px;
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
 
 .product-image {
     width: 100%;
-
     height: 220px;
 
     object-fit: cover;
-
     display: block;
 
     border-radius: 12px;
-
     margin-bottom: 18px;
 
     background: #352934;
 
-    transition: transform 0.25s ease, filter 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
 .card:hover .product-image {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 
+/* =========================================================
+   PRODUCT CARD TEXT
+========================================================= */
 
 .card h3 {
     margin: 0 0 10px;
-
     font-size: 22px;
-
     color: #f0a4c5;
 }
 
 .card p {
     margin: 7px 0;
-
     line-height: 1.5;
-
     color: #d0c6cc;
 }
 
 .price {
     font-size: 20px;
-
     font-weight: bold;
-
     color: #f3a0c2;
-
     margin-top: 12px !important;
 }
 
 
+/* =========================================================
+   ACTION BUTTON AREA
+========================================================= */
 
 .actions {
     display: flex;
-
     gap: 10px;
-
     margin-top: auto;
-
     padding-top: 18px;
-
     align-items: center;
 }
 
@@ -210,30 +245,44 @@ a {
     margin: 0;
 }
 
-.btn {
-    display: inline-block;
 
-    padding: 11px 16px;
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 10px 17px;
 
     border: none;
-
     border-radius: 8px;
 
     background: #9b587e;
-
-    color: white;
+    color: #ffffff;
 
     font-size: 14px;
-
     font-weight: bold;
 
     cursor: pointer;
-
     text-align: center;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
 }
 
 .btn:hover {
     background: #b36b93;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn.secondary {
@@ -254,7 +303,6 @@ a {
 
 .btn.light {
     background: #39343a;
-
     color: #eeeeee;
 }
 
@@ -262,33 +310,181 @@ a {
     background: #4a434b;
 }
 
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
 
-.product-details {
-    max-width: 600px;
 
-    margin: 30px auto;
+/* =========================================================
+   GENERAL FORM CARD
+   FIXES:
+   - Register
+   - Add Product
+   - Update Product
+   - Checkout
+   - Online Payment
+   - Payment Result
+   - Category form
+========================================================= */
+
+.form-card {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 35px auto;
 
     background: #242025;
 
-    padding: 20px;
+    padding: 30px;
 
     border-radius: 16px;
 
     border: 1px solid #39313a;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.40);
 }
 
-.product-details .product-image {
+
+/* Form card headings */
+
+.form-card h1,
+.form-card h2,
+.form-card h3 {
+    color: #f0a4c5;
+    margin-top: 0;
+}
+
+.form-card h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+
+/* Form labels */
+
+.form-card label {
+    display: block;
+
+    margin: 16px 0 7px;
+
+    color: #e6dce1;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* Inputs */
+
+.form-card input,
+.form-card textarea,
+.form-card select {
+    display: block;
+
     width: 100%;
 
-    height: 350px;
+    min-height: 44px;
 
-    object-fit: cover;
+    padding: 10px 12px;
 
-    border-radius: 14px;
+    border: 1px solid #514650;
+    border-radius: 8px;
+
+    background: #19171b;
+
+    color: #eeeeee;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
 
+/* Textarea */
 
+.form-card textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+
+/* Select */
+
+.form-card select {
+    cursor: pointer;
+}
+
+
+/* Focus */
+
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus {
+    border-color: #b36b93;
+
+    box-shadow: 0 0 0 3px rgba(179, 107, 147, 0.12);
+}
+
+
+/* Placeholder */
+
+.form-card input::placeholder,
+.form-card textarea::placeholder {
+    color: #898088;
+}
+
+
+/* Button inside form */
+
+.form-card .btn {
+    margin-top: 20px;
+}
+
+
+/* Small help text */
+
+.form-card small {
+    color: #a89ea6;
+    line-height: 1.4;
+}
+
+
+/* Horizontal line */
+
+.form-card hr {
+    border: 0;
+    border-top: 1px solid #40363f;
+    margin: 25px 0;
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.form-card input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+
+    min-height: auto;
+
+    display: inline-block;
+
+    margin: 0;
+
+    accent-color: #9b587e;
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
 
 .login-container {
     width: 100%;
@@ -298,133 +494,34 @@ a {
     display: flex;
 
     justify-content: center;
-
     align-items: flex-start;
 
-    padding-top: 60px;
+    padding: 60px 20px;
 }
 
 .login-container .form-card {
     width: 450px;
-
-    max-width: 90%;
-
+    max-width: 100%;
     margin: 0 auto;
-
-    background: #242025;
-
-    padding: 30px;
-
-    border-radius: 14px;
-
-    border: 1px solid #39313a;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40);
 }
-
 
 .login-container .form-card h2 {
     text-align: center;
-
-    color: #f0a4c5;
-
-    margin: 0 0 25px;
 }
-
-
-.login-container .form-card form {
-    display: block;
-
-    width: 100%;
-}
-
-.login-container .form-card label {
-    display: block;
-
-    width: 100%;
-
-    margin: 15px 0 6px;
-
-    font-weight: bold;
-
-    color: #e6dce1;
-}
-
-
-.login-container .form-card input {
-    display: block;
-
-    width: 100%;
-
-    height: 45px;
-
-    margin: 0 0 15px;
-
-    padding: 10px;
-
-    border: 1px solid #514650;
-
-    border-radius: 7px;
-
-    background: #19171b;
-
-    color: #eeeeee;
-
-    font-size: 15px;
-}
-
-.login-container .form-card input:focus {
-    outline: none;
-
-    border-color: #b36b93;
-}
-
-.login-container .form-card input::placeholder {
-    color: #898088;
-}
-
-
-
 
 .login-container .form-card .btn {
-    display: block;
-
     width: 100%;
-
-    height: 45px;
-
     margin-top: 20px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #9b587e;
-
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
 }
-
-.login-container .form-card .btn:hover {
-    background: #b36b93;
-}
-
-
 
 .login-container .form-card p {
     text-align: center;
-
     color: #d0c6cc;
-
     margin-top: 20px;
 }
 
 .login-container .form-card p a {
     color: #f0a4c5;
-
     font-weight: bold;
 }
 
@@ -433,17 +530,47 @@ a {
 }
 
 
+/* =========================================================
+   REGISTER PAGE
+========================================================= */
+
+/*
+   Register page uses .form-card directly,
+   so this makes it look like the login box.
+*/
+
+body > .form-card {
+    margin-top: 60px;
+}
+
+.form-card p {
+    color: #d0c6cc;
+}
+
+.form-card p a {
+    color: #f0a4c5;
+    font-weight: bold;
+}
+
+.form-card p a:hover {
+    color: #b36b93;
+}
+
+
+/* =========================================================
+   ERROR / SUCCESS MESSAGE
+========================================================= */
 
 .error {
     background: #3a2024;
 
     color: #ffb3b3;
 
-    padding: 10px;
+    padding: 12px 14px;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
-    margin: 10px 0;
+    margin: 15px 0;
 
     border: 1px solid #66363c;
 }
@@ -453,66 +580,477 @@ a {
 
     color: #a9e5b9;
 
-    padding: 10px;
+    padding: 12px 14px;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
-    margin: 10px 0;
+    margin: 15px 0;
 
     border: 1px solid #365d42;
 }
 
 
+/* =========================================================
+   TABLES
+   FIXES:
+   - Admin Products
+   - Categories
+   - Customers
+   - Orders
+   - My Orders
+   - Order Details
+========================================================= */
+
 .table-wrap {
-    overflow: auto;
+    width: 100%;
+
+    overflow-x: auto;
 
     background: #242025;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
     border: 1px solid #39313a;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 .table {
     width: 100%;
 
     border-collapse: collapse;
+
+    min-width: 650px;
 }
 
 .table th,
 .table td {
-    padding: 12px;
+    padding: 13px 14px;
 
     border-bottom: 1px solid #3a333b;
 
     text-align: left;
+
+    vertical-align: middle;
 }
 
 .table th {
     background: #30252e;
 
     color: #f0bfd4;
+
+    font-size: 14px;
+
+    white-space: nowrap;
 }
 
 .table td {
     color: #ddd5da;
+
+    font-size: 14px;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background: #2b252c;
 }
 
 
-.footer {
-    background: #211921;
+/* Buttons inside tables */
 
-    color: #d6ccd1;
+.table .btn {
+    min-height: 36px;
+    padding: 7px 12px;
+    margin: 2px;
+    font-size: 13px;
+}
+
+
+/* Product table image */
+
+.table img {
+    display: block;
+}
+
+
+/* =========================================================
+   ADMIN PRODUCT FORM
+========================================================= */
+
+.form-card form {
+    width: 100%;
+}
+
+
+/* Make product form fields nicely spaced */
+
+.form-card form > input,
+.form-card form > textarea,
+.form-card form > select {
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   CHECKBOX / AVAILABILITY ROW
+========================================================= */
+
+.form-card label:has(input[type="checkbox"]) {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+
+    padding: 10px 12px;
+
+    background: #1e1a20;
+
+    border: 1px solid #3d343d;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+.cart-total {
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 25px 0 20px auto;
+
+    padding: 18px 22px;
+
+    background: #30252e;
+
+    border: 1px solid #493747;
+
+    border-radius: 10px;
+
+    color: #f3a9c8;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    text-align: right;
+}
+
+
+/* Cart quantity input */
+
+.table input[type="number"] {
+    width: 75px;
+
+    padding: 8px;
+
+    background: #19171b;
+
+    color: #ffffff;
+
+    border: 1px solid #514650;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+.table input[type="number"]:focus {
+    border-color: #b36b93;
+}
+
+
+/* Cart buttons */
+
+.container > .btn {
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   CHECKOUT / PAYMENT
+========================================================= */
+
+/*
+   Makes checkout and payment screens
+   clean and centered.
+*/
+
+.form-card > p {
+    line-height: 1.6;
+}
+
+.form-card strong {
+    color: #f0a4c5;
+}
+
+
+/* Payment fields */
+
+.form-card input[name="card_number"] {
+    letter-spacing: 1px;
+}
+
+.form-card input[name="cvv"] {
+    max-width: 180px;
+}
+
+
+/* Payment button */
+
+.form-card form .btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   PAYMENT RESULT
+========================================================= */
+
+.form-card h2:first-child {
+    text-align: center;
+}
+
+
+/* =========================================================
+   ORDER STATUS BADGES
+========================================================= */
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #4a3a25;
+    color: #f3be7a;
+}
+
+.status-confirmed {
+    background: #203a30;
+    color: #7fe687;
+}
+
+.status-delivered {
+    background: #263b49;
+    color: #8fd3ff;
+}
+
+.status-cancelled {
+    background: #43262b;
+    color: #ff8f99;
+}
+
+
+/* =========================================================
+   PRODUCT DETAILS
+========================================================= */
+
+.product-details {
+    max-width: 650px;
+
+    margin: 35px auto;
+
+    background: #242025;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    border: 1px solid #39313a;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.product-details .product-image {
+    width: 100%;
+    height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+
+    margin-bottom: 20px;
+}
+
+.product-details h1 {
+    color: #f0a4c5;
+    margin-top: 0;
+}
+
+.product-details .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   ORDER DETAILS
+========================================================= */
+
+.card h2 {
+    color: #f0a4c5;
+}
+
+.card h3 {
+    color: #f0a4c5;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    background: #211a20;
+
+    color: #ffffff;
+
+    margin-top: 50px;
+
+    border-top: 1px solid #40333d;
+}
+
+.footer-container {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 40px 25px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 40px;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+
+    color: #ffffff;
+}
+
+.footer-section p {
+    color: #cfc5cc;
+
+    margin: 8px 0;
+
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    border-top: 1px solid #40333d;
 
     text-align: center;
 
-    padding: 20px;
-
-    margin-top: 30px;
-
-    border-top: 1px solid #3d3039;
+    padding: 18px 20px;
 }
 
+.footer-bottom p {
+    margin: 5px 0;
+
+    color: #aaa0a8;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
+
+.container .grid .card h2 {
+    color: #f3a9c8;
+
+    font-size: 32px;
+
+    margin: 8px 0 0;
+}
+
+.container .grid .card h3 {
+    color: #ddd0d8;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   ADMIN ORDER UPDATE FORM
+========================================================= */
+
+.table form {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin: 0;
+}
+
+.table form select {
+    min-height: 34px;
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    background: #2d242c;
+
+    color: #ffffff;
+
+    border: 1px solid #483947;
+}
+
+.table form .btn {
+    min-height: 34px;
+
+    padding: 6px 10px;
+}
+
+
+/* =========================================================
+   HORIZONTAL RULE
+========================================================= */
+
+hr {
+    border: 0;
+
+    border-top: 1px solid #40363f;
+
+    margin: 20px 0;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -527,10 +1065,14 @@ a {
     .nav-links {
         gap: 15px;
     }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .navbar {
         flex-direction: column;
@@ -541,10 +1083,31 @@ a {
     }
 
     .nav-links {
-        flex-wrap: wrap;
-
         justify-content: center;
     }
+
+    .form-card {
+        width: 94%;
+        padding: 22px;
+        margin: 25px auto;
+    }
+
+    .cart-total {
+        max-width: 100%;
+    }
+
+    .product-details {
+        width: 94%;
+        padding: 20px;
+    }
+
+    .product-details .product-image {
+        height: 280px;
+    }
+}
+
+
+@media (max-width: 600px) {
 
     .grid {
         grid-template-columns: 1fr;
@@ -562,7 +1125,7 @@ a {
         width: 92%;
     }
 
-    .card {
+    .grid .card {
         min-height: auto;
     }
 
@@ -576,20 +1139,181 @@ a {
         align-items: stretch;
     }
 
+    .actions form,
     .actions .btn {
         width: 100%;
     }
-
 
     .login-container {
         padding-top: 40px;
     }
 
     .login-container .form-card {
-        width: 90%;
-
+        width: 94%;
         max-width: 450px;
-
         padding: 25px;
     }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .table {
+        min-width: 700px;
+    }
+
+    .cart-total {
+        font-size: 18px;
+    }
+}
+/* =========================================================
+   REGISTER PAGE
+========================================================= */
+
+.register-container {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 60px 20px;
+}
+
+
+/* Register Card */
+
+.register-container .form-card {
+    width: 450px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+/* Register Heading */
+
+.register-container .form-card h2 {
+    text-align: center;
+    margin: 0 0 25px;
+}
+
+
+/* Register Form */
+
+.register-container .form-card form {
+    display: block;
+    width: 100%;
+}
+
+
+/* Labels */
+
+.register-container .form-card form label {
+    display: block;
+    width: 100%;
+
+    margin: 16px 0 7px;
+
+    color: #e6dce1;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* Inputs */
+
+.register-container .form-card form input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    min-height: 44px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #514650;
+    border-radius: 8px;
+
+    background: #19171b;
+    color: #eeeeee;
+
+    font-size: 15px;
+
+    outline: none;
+
+    margin: 0;
+}
+
+
+/* Input Focus */
+
+.register-container .form-card form input:focus {
+    border-color: #b36b93;
+
+    box-shadow:
+        0 0 0 3px rgba(179, 107, 147, 0.12);
+}
+
+
+/* Placeholder */
+
+.register-container .form-card form input::placeholder {
+    color: #898088;
+}
+
+
+/* Register Button */
+
+.register-container .form-card form .btn {
+    display: flex;
+
+    width: 100%;
+    min-height: 48px;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 25px;
+}
+
+
+/* Login Text */
+
+.register-container .form-card > p {
+    text-align: center;
+
+    color: #d0c6cc;
+
+    margin-top: 20px;
+}
+
+
+/* Login Link */
+
+.register-container .form-card > p a {
+    color: #f0a4c5;
+    font-weight: bold;
+}
+
+
+.register-container .form-card > p a:hover {
+    color: #b36b93;
+}
+
+
+/* Register Mobile */
+
+@media (max-width: 600px) {
+
+    .register-container {
+        padding: 40px 15px;
+    }
+
+    .register-container .form-card {
+        width: 100%;
+        padding: 25px;
+    }
+
 }

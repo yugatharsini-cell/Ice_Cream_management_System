@@ -5,25 +5,19 @@ require_once "config/auth.php";
 
 $error = "";
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-
     if (
         $name === '' ||
         !filter_var($email, FILTER_VALIDATE_EMAIL) ||
         strlen($password) < 6
     ) {
-
-        $error =
-            "Enter a valid name, email, and password of at least 6 characters.";
-
+        $error = "Enter a valid name, email, and password of at least 6 characters.";
     } else {
-
 
         $check = $pdo->prepare("
             SELECT id
@@ -33,20 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $check->execute([$email]);
 
-
         if ($check->fetch()) {
 
             $error = "Email already exists.";
 
         } else {
 
-
-
             $hash = password_hash(
                 $password,
                 PASSWORD_DEFAULT
             );
-
 
             $stmt = $pdo->prepare("
                 INSERT INTO users
@@ -61,12 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hash
             ]);
 
-
-
-            header(
-                "Location: login.php?registered=1"
-            );
-
+            header("Location: login.php?registered=1");
             exit;
         }
     }
@@ -81,22 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Register</title>
+    <title>Create Account | Ice Cream Shop</title>
 
-    <link
-        rel="stylesheet"
-        href="assets/style.css"
-    >
+    <link rel="stylesheet" href="assets/style.css">
 
 </head>
 
 <body>
-
 
     <nav class="navbar">
 
@@ -111,90 +89,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
 
-    <div class="form-card">
+    <main class="register-container">
 
-        <h2>
-            Create Account
-        </h2>
+        <div class="form-card">
 
+            <h2>Create Account</h2>
 
-        <?php if ($error): ?>
+            <?php if ($error): ?>
 
-            <div class="error">
+                <div class="error">
+                    <?= e($error) ?>
+                </div>
 
-                <?= e($error) ?>
-
-            </div>
-
-        <?php endif; ?>
+            <?php endif; ?>
 
 
-        <form method="post">
+            <form method="post">
+
+                <label for="name">
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    value="<?= e($_POST['name'] ?? '') ?>"
+                    required
+                >
 
 
+                <label for="email">
+                    Email
+                </label>
 
-            <label>
-                Name
-            </label>
-
-            <input
-                type="text"
-                name="name"
-                required
-            >
-
-            <label>
-                Email
-            </label>
-
-            <input
-                type="email"
-                name="email"
-                required
-            >
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value="<?= e($_POST['email'] ?? '') ?>"
+                    required
+                >
 
 
-            <label>
-                Password
-            </label>
+                <label for="password">
+                    Password
+                </label>
 
-            <input
-                type="password"
-                name="password"
-                required
-            >
-
-
-            <br>
-            <br>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter at least 6 characters"
+                    required
+                >
 
 
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Register
+                </button>
+
+            </form>
 
 
-            <button
-                type="submit"
-                class="btn"
-            >
-                Register
-            </button>
+            <p>
+                Already have an account?
+                <a href="login.php">Login</a>
+            </p>
 
+        </div>
 
-        </form>
-
-
-        <p>
-
-            Already have an account?
-
-            <a href="login.php">
-                Login
-            </a>
-
-        </p>
-
-
-    </div>
-
+    </main>
 
 </body>
 
