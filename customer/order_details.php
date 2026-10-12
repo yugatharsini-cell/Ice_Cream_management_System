@@ -119,6 +119,17 @@ $items = $stmt->fetchAll();
                 </strong>
             </p>
 
+            <?php if (in_array($order['payment_status'], ['Pending', 'Failed', 'Cancelled'], true)): ?>
+                <p style="margin-top:15px;">
+                    <a
+                        href="../payment.php?order_id=<?= (int)$order['id'] ?>"
+                        class="btn"
+                    >
+                        <?= $order['payment_status'] === 'Pending' ? 'Pay Now' : 'Try Payment Again' ?>
+                    </a>
+                </p>
+            <?php endif; ?>
+
 
          
 

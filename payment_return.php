@@ -150,8 +150,15 @@ $paymentStatus = $order['payment_status'];
         </p>
 
         <p>
-            You can try the payment again from your order.
+            You can try the payment again.
         </p>
+
+        <a
+            href="payment.php?order_id=<?= (int)$order['id'] ?>"
+            class="btn"
+        >
+            Try Payment Again
+        </a>
 
         <a
             href="customer/order_details.php?id=<?= (int)$order['id'] ?>"

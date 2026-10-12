@@ -24,6 +24,7 @@ CREATE TABLE products (
     category_id INT NOT NULL,
     image VARCHAR(255) DEFAULT NULL,
     availability TINYINT(1) NOT NULL DEFAULT 1,
+    stock_quantity INT UNSIGNED NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(id)
         ON UPDATE CASCADE ON DELETE RESTRICT
@@ -55,7 +56,7 @@ CREATE TABLE order_items (
 CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
-    payment_method VARCHAR(50) NOT NULL DEFAULT 'Demo Online Payment',
+    payment_method VARCHAR(50) NOT NULL DEFAULT 'PayHere Sandbox',
     amount DECIMAL(10,2) NOT NULL,
     payment_status ENUM('Pending','Successful','Failed','Cancelled') NOT NULL DEFAULT 'Pending',
     transaction_reference VARCHAR(100) DEFAULT NULL,
@@ -67,9 +68,9 @@ CREATE TABLE payments (
 INSERT INTO categories (name) VALUES
 ('Vanilla'), ('Chocolate'), ('Strawberry'), ('Mango'), ('Special');
 
-INSERT INTO products (name, description, price, category_id, image, availability) VALUES
-('Classic Vanilla', 'Smooth and creamy vanilla ice cream.', 450.00, 1, 'ClassicVanilla.jpg', 1),
-('Chocolate Dream', 'Rich chocolate ice cream for chocolate lovers.', 500.00, 2, 'ChocolateDream.jpg', 1),
-('Strawberry Bliss', 'Fresh strawberry flavored ice cream.', 480.00, 3, 'StrawberryBliss.jpg', 1),
-('Mango Magic', 'Sweet tropical mango ice cream.', 520.00, 4, 'MangoMagic.jpg', 1),
-('Royal Sundae', 'A special ice cream treat.', 750.00, 5, 'RoyalSundae.jpg', 1);
+INSERT INTO products (name, description, price, category_id, image, availability, stock_quantity) VALUES
+('Classic Vanilla', 'Smooth and creamy vanilla ice cream.', 450.00, 1, 'ClassicVanilla.jpg', 1, 10),
+('Chocolate Dream', 'Rich chocolate ice cream for chocolate lovers.', 500.00, 2, 'ChocolateDream.jpg', 1, 10),
+('Strawberry Bliss', 'Fresh strawberry flavored ice cream.', 480.00, 3, 'StrawberryBliss.jpg', 1, 10),
+('Mango Magic', 'Sweet tropical mango ice cream.', 520.00, 4, 'MangoMagic.jpg', 1, 10),
+('Royal Sundae', 'A special ice cream treat.', 750.00, 5, 'RoyalSundae.jpg', 1, 10);
