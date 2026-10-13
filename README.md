@@ -4,97 +4,94 @@
 
 **Ice Cream Shop E-Commerce Management System**
 
----
-
 ## 1. Project Description
 
-The Ice Cream Shop E-Commerce Management System is a web-based application developed to make ice cream shopping easier and more convenient for customers. The system allows customers to register, log in, browse available ice cream products, view product details, check available stock quantities, add products to the shopping cart, place orders, and complete payments through **PayHere Sandbox**.
+The Ice Cream Shop E-Commerce Management System is a web-based application developed to make ice cream shopping easier and more convenient for customers.
 
-The system also provides an administrative section where the administrator can manage ice cream products, categories, stock quantities, customers, and customer orders.
+The system allows customers to register, log in, browse ice cream products, view product prices and stock availability, add products to a shopping cart, place orders, and make online payments through the **PayHere Sandbox payment gateway**.
 
-The main purpose of this system is to provide a simple online platform for purchasing ice cream products while reducing the manual work involved in managing products, stock, and customer orders.
+The system also provides an administrator section for managing ice cream products, categories, prices, stock quantities, customer information, and customer orders.
+
+The main purpose of this system is to provide a user-friendly online shopping platform while improving the efficiency of ice cream shop management and reducing manual work.
 
 ---
 
 ## 2. Problem Statement
 
-Traditional ice cream shops may require customers to physically visit the shop to view available products, check prices, and make purchases.
+Traditional ice cream shops may require customers to visit the physical shop to view available products, check prices, and make purchases. This can be inconvenient for customers who prefer online shopping.
 
-For shop administrators, manually managing products, categories, stock quantities, customers, and customer orders can be time-consuming and may lead to errors.
+Similarly, manually managing products, categories, stock quantities, customer information, and orders can be time-consuming for shop administrators and may lead to errors.
 
-Therefore, there is a need for a simple online ice cream shop e-commerce system that allows customers to conveniently browse and purchase ice cream products while helping administrators manage products, stock, and orders efficiently.
+Therefore, an online ice cream shop management system is needed to help customers browse and purchase products conveniently while allowing administrators to manage shop operations efficiently.
 
 ---
 
 ## 3. Project Objectives
 
-The main objectives of the Ice Cream Shop E-Commerce Management System are:
+The main objectives of this project are:
 
 - To develop a simple and user-friendly online ice cream shopping system.
-- To allow customers to register and securely log in to the system.
+- To provide customer registration, login, and logout functionality.
 - To allow customers to browse available ice cream products.
-- To allow customers to view product details and prices.
-- To display available stock quantities to customers.
-- To allow customers to add, update, and remove products from the shopping cart.
-- To allow customers to place ice cream orders online.
-- To provide an online payment facility.
+- To display product information, prices, and stock quantities.
+- To allow customers to add, update, and remove products from their shopping carts.
+- To calculate shopping cart totals automatically.
+- To allow customers to proceed through checkout and place orders.
+- To integrate PayHere Sandbox for online payment testing.
+- To verify payment notifications before confirming orders.
+- To manage stock quantities based on successful payments.
 - To allow customers to view their order details and order history.
-- To allow administrators to manage products and categories.
-- To allow administrators to manage stock quantities.
-- To allow administrators to manage customer information and orders.
+- To provide administrators with product, category, stock, customer, and order management functionality.
 - To reduce manual work and improve the efficiency of ice cream shop management.
 
 ---
 
 ## 4. Main Features
 
-### Customer Features
+### 4.1 Customer Features
 
 - Customer registration
 - Customer login and logout
 - Browse ice cream products
-- View product details
+- View product information and prices
 - Browse products by category
-- View product prices
 - View available stock quantities
-- Add products to cart
-- Update cart quantity
-- Remove products from cart
-- View cart total
-- Checkout
-- PayHere Sandbox online payment
-- Place orders
+- Add products to the shopping cart
+- Update product quantities in the cart
+- Remove products from the cart
+- View cart totals
+- Proceed to checkout
+- Make payments through PayHere Sandbox
 - View order details
 - View order history
-- View order status
+- Check order status
 
-### Administrator Features
+### 4.2 Administrator Features
 
 - Administrator login
 - Admin dashboard
-- Add ice cream products
-- Edit ice cream products
-- Delete ice cream products
+- Add, edit, and delete ice cream products
 - Manage product categories
-- Manage product prices
-- Manage product images
-- Manage stock quantities
+- Manage product prices and images
+- Update stock quantities
 - View customer information
 - View customer orders
 - Manage customer orders
-- Update order information
+- Update order information and status
 
-### Stock Management
+### 4.3 Stock Management
 
-The administrator can manage the available stock quantity of each ice cream product.
+The system allows administrators to manage the available stock quantity of each ice cream product.
 
-Customers can view the available stock quantity before adding a product to the shopping cart.
+Customers can view stock availability before placing an order. The system validates product quantities against available stock during checkout.
 
-The system checks stock before creating an order and reduces stock only after a verified successful PayHere payment notification.
+After receiving and verifying a successful PayHere payment notification, the system updates the payment and order statuses and reduces the relevant stock quantities. Stock should not be reduced repeatedly when the same notification is received more than once.
 
-### Payment Method
+### 4.4 Online Payment
 
-The system uses **PayHere Sandbox** for online payment testing. Sandbox payments are simulated for testing and do not charge real money.
+The system integrates the PayHere Checkout API in **Sandbox mode**.
+
+Customers are redirected to the PayHere Sandbox checkout page to test the payment process. Sandbox transactions are for testing purposes and do not charge real money.
 
 ---
 
@@ -130,9 +127,10 @@ The system uses **PayHere Sandbox** for online payment testing. Sandbox payments
 - Git
 - GitHub
 
-### Browser
+### Web Browser
 
-- Google Chrome / Microsoft Edge
+- Google Chrome
+- Microsoft Edge
 
 ### Payment Gateway
 
@@ -143,248 +141,304 @@ The system uses **PayHere Sandbox** for online payment testing. Sandbox payments
 
 ## 6. Project Scope
 
-The system is designed to provide basic online ice cream shopping and ice cream shop management functions.
+The project focuses on online ice cream shopping and the basic management of an ice cream shop.
 
-### In Scope
+### 6.1 In Scope
 
-The system includes:
-
-- Customer registration and login
-- Administrator login
-- Product browsing
-- Product details
-- Product category management
-- Product management
+- Customer registration and authentication
+- Administrator authentication
+- Product browsing and product information
+- Product and category management
 - Product image management
-- Stock quantity management
+- Stock management
 - Shopping cart management
-- Checkout
-- PayHere Sandbox online payment
-- Payment status handling
-- Order placement
-- Order history
-- Order management
-- Customer management
+- Checkout and order creation
+- PayHere Sandbox payment integration
+- Payment notification verification
+- Payment and order status management
+- Customer order history
+- Customer information management
+- Administrator order management
 
-### Out of Scope
+### 6.2 Out of Scope
 
-The following features are not included in the current version:
+The following features are outside the scope of the current project version:
 
 - Delivery driver management
 - Real-time delivery tracking
 - Third-party delivery service integration
-- Mobile application
+- Dedicated mobile application
 - Advanced accounting functions
 - Supplier management
 - Multi-branch shop management
-- Advanced recommendation system
+- Advanced product recommendation systems
 
 ---
 
 ## 7. Target Users
 
-### Customers
+### 7.1 Customers
 
-The system is intended for customers who want to browse and purchase ice cream products online without visiting the physical shop.
-
-Customers can:
+Customers use the system to:
 
 - Create an account.
-- Log in to the system.
+- Log in securely.
 - Browse ice cream products.
-- View available stock.
-- Add products to the shopping cart.
-- Checkout.
-- Make online payments through PayHere Sandbox.
-- Place orders.
-- View their order history.
+- View product prices and stock availability.
+- Manage shopping cart items.
+- Proceed to checkout.
+- Test online payments through PayHere Sandbox.
+- View order details and order history.
+- Check order status.
 
-### Administrator
+### 7.2 Administrator
 
-The administrator manages the ice cream shop system, including:
+The administrator uses the system to:
 
-- Products
-- Categories
-- Stock quantities
-- Customers
-- Customer orders
-- Product information
+- Manage ice cream products.
+- Manage product categories.
+- Update product prices and images.
+- Manage stock quantities.
+- View customer information.
+- View and manage customer orders.
+- Monitor shop operations through the admin dashboard.
 
 ---
 
 ## 8. System Modules
 
-The system consists of the following main modules:
-
-### 1. User Management
+### 8.1 User Management Module
 
 - Customer registration
-- Customer login
-- Customer logout
-- Administrator login
-- User authentication
+- Customer login and logout
+- Administrator authentication
+- Session-based authentication
+- Access control for customer and administrator pages
 
-### 2. Product Management
+### 8.2 Product Management Module
 
-- Add ice cream products
-- Edit products
+- Add new ice cream products
+- Edit product information
 - Delete products
-- Manage product categories
-- Manage product prices
-- Manage product images
-- View product details
-- View product availability
+- Manage categories
+- Manage prices and product images
+- Display product availability
 
-### 3. Stock Management
+### 8.3 Stock Management Module
 
-- Add stock quantity
-- Update stock quantity
+- Add and update stock quantities
 - Display available stock
-- Monitor product availability
-- Prevent ordering unavailable products
-- Reduce stock after successful payment
+- Validate stock during checkout
+- Prevent orders that exceed available stock
+- Reduce stock after verified successful payment
+- Prevent duplicate stock deductions for repeated payment notifications
 
-### 4. Shopping Cart
+### 8.4 Shopping Cart Module
 
-- Add products to cart
-- Update product quantity
+- Add products to the cart
+- Update product quantities
 - Remove products
-- View cart
-- Calculate total amount
+- Display cart items
+- Calculate the total amount
 
-### 5. Order Management
+### 8.5 Order Management Module
 
-- Place orders
+- Create orders during checkout
+- Store order items and quantities
 - View order details
 - View order history
-- Manage customer orders
-- Update order information
+- Track order status
+- Allow administrators to manage orders
 
-### 6. Online Payment
+### 8.6 Online Payment Module
 
-- Proceed to checkout
-- Redirect customer to PayHere Sandbox
-- Process simulated online payment
-- Receive PayHere payment notification
-- Verify payment notification checksum
+- Validate checkout information
+- Generate PayHere payment requests
+- Redirect customers to PayHere Sandbox
+- Receive server-to-server payment notifications
+- Verify payment notification signatures
+- Validate payment amount and currency
 - Update payment status
-- Complete the order after successful payment
+- Confirm orders after verified successful payments
 
-### 7. Administrator Management
+### 8.7 Administrator Module
 
-- Manage customers
-- Manage products
-- Manage categories
+- Access the admin dashboard
+- Manage products and categories
 - Manage stock
-- Manage orders
+- View customers
+- View and manage orders
 - Monitor the overall system
 
 ---
 
 ## 9. Payment Method
 
-The project uses **PayHere Sandbox Online Payment** as the payment method.
+The project uses **PayHere Sandbox Online Payment** for testing the online payment process.
 
-Customers proceed to checkout and are redirected to the PayHere Sandbox payment gateway. The payment is simulated for academic testing and no real money is charged.
+The payment process follows these steps:
 
-The system receives the payment notification from PayHere and verifies the notification before marking the payment as successful and confirming the order.
+1. The customer logs in and adds products to the shopping cart.
+2. The customer proceeds to checkout.
+3. The system validates the order and available stock.
+4. The system creates a pending order and its order items.
+5. The customer is redirected to the PayHere Sandbox checkout page.
+6. The customer completes the simulated payment.
+7. PayHere sends a server-to-server notification to the configured notification endpoint.
+8. The system verifies the notification signature, merchant details, payment amount, currency, and order information.
+9. If the payment is verified as successful, the system updates the payment status and confirms the order.
+10. The system reduces stock quantities once for the successful payment.
+
+**Important:** The customer returning to the website is not, by itself, proof of successful payment. The order must be confirmed based on a verified payment notification.
+
+Sandbox payments are for testing and do not represent real-money transactions.
 
 ---
 
 ## 10. Database
 
-The project uses **MySQL** as the database management system.
+The project uses **MySQL** as its database management system.
+
+The database is named:
+
+`ice_cream_shop`
 
 The database stores information related to:
 
 - Users
-- Categories
-- Products
+- Product categories
+- Ice cream products
 - Stock quantities
 - Orders
 - Order items
 - Payments
 
-The shopping cart is maintained using the customer session.
+The shopping cart is maintained using the customer's session.
 
-The database is managed using **phpMyAdmin** through XAMPP.
+The database can be managed through phpMyAdmin in XAMPP.
 
-The final database SQL file is included in the project root:
+The database SQL file should be included in the project root as:
 
-```text
-database.sql
-```
+`database.sql`
+
+If the actual SQL file has a different filename, the documentation should be updated to match it.
 
 ---
 
-## 11. Project Requirements
+## 11. Project Requirements and Local Installation
 
-To run the project locally, the following software is required:
+### 11.1 Required Software
 
 - XAMPP
 - Visual Studio Code
-- Web browser
-- MySQL
+- A web browser
 - PHP
 - Apache
+- MySQL
 - phpMyAdmin
+- Git (optional, for version control)
 
-The project should be placed inside the XAMPP `htdocs` folder.
+### 11.2 Installation Steps
 
-Example:
+1. Install and open XAMPP.
+2. Start Apache and MySQL from the XAMPP Control Panel.
+3. Place the project folder inside the XAMPP `htdocs` directory.
+4. Ensure the project folder is named `ice_cream_shop`.
+5. Import the project database into MySQL using phpMyAdmin.
+6. Configure the database connection in `config/db.php`.
+7. Configure PayHere Sandbox settings in `config/payhere.php`.
+8. Open the project in a web browser.
+
+### 11.3 Project Directory
 
 ```text
 C:\xampp\htdocs\ice_cream_shop\
 ```
 
-Apache and MySQL should be running in the XAMPP Control Panel.
+### 11.4 Local Website URL
+
+```text
+http://localhost/ice_cream_shop/
+```
+
+The project runs locally when Apache and MySQL are running and the database connection is configured correctly.
 
 ---
 
-## 12. PayHere Sandbox Setup
+## 12. PayHere Sandbox Configuration
 
-The project uses the **PayHere Checkout API in Sandbox mode** for online payment testing.
+The project uses the PayHere Checkout API in Sandbox mode for academic payment testing.
 
-Before testing payment:
+### 12.1 Configuration Steps
 
-1. Create or use a PayHere Sandbox merchant account.
-2. Get the Sandbox Merchant ID and Merchant Secret from the PayHere merchant portal.
+1. Create or access a PayHere Sandbox merchant account.
+2. Obtain the appropriate Sandbox Merchant ID and Merchant Secret.
 3. Open `config/payhere.php`.
-4. Replace `YOUR_SANDBOX_MERCHANT_ID` with the Sandbox Merchant ID.
-5. Replace `YOUR_SANDBOX_MERCHANT_SECRET` with the Sandbox Merchant Secret.
-6. Set `notify_url` to a public URL that points to `payment_notify.php`.
-7. Start Apache and MySQL in XAMPP.
-8. Add the integration domain/app in the PayHere Sandbox merchant portal as required.
-9. Test checkout using PayHere Sandbox test card details.
+4. Configure the Sandbox Merchant ID and Merchant Secret.
+5. Set the checkout URL to the PayHere Sandbox checkout endpoint.
+6. Configure the return and cancellation URLs.
+7. Configure a publicly accessible HTTPS notification URL that points to `payment_notify.php`.
+8. Configure the integration domain or application according to the PayHere Sandbox requirements.
+9. Start Apache and MySQL.
+10. Test the checkout and payment notification process using the appropriate Sandbox test details.
 
-### Important
+### 12.2 Important Configuration Notes
 
-The PayHere notification URL must be publicly accessible. A normal `localhost` URL cannot receive PayHere server notifications directly.
+- Keep Sandbox credentials private.
+- Do not commit the Merchant Secret to a public GitHub repository.
+- Do not publish real payment credentials in source code or screenshots.
+- A normal `localhost` URL cannot receive server-to-server notifications directly from PayHere.
+- During local testing, a valid public HTTPS tunnel can expose the local notification endpoint.
+- A tunnel URL may change or stop working. Update the configured notification URL whenever necessary.
+- The return URL and cancellation URL must match the intended local or hosted environment.
+- The PayHere checkout URL must remain the official Sandbox checkout endpoint when testing in Sandbox mode.
+- Successful payment handling must rely on verified notifications rather than trusting browser redirects alone.
 
-The project does **not** store the customer's card number, expiry date, or CVV. Card information is entered only on the PayHere Sandbox payment page.
+Example local return and cancellation URLs:
+
+```text
+http://localhost/ice_cream_shop/payment_return.php
+http://localhost/ice_cream_shop/payment_cancel.php
+```
+
+Example notification URL format for local testing through a public HTTPS tunnel:
+
+```text
+https://YOUR-ACTIVE-PUBLIC-URL/ice_cream_shop/payment_notify.php
+```
+
+Replace `YOUR-ACTIVE-PUBLIC-URL` with the actual working HTTPS URL. Do not use the example as a real endpoint.
+
+### 12.3 Card Information
+
+The project does not need to store customers' card numbers, expiry dates, or CVV values. Payment card details should be entered on the PayHere-hosted checkout page.
 
 ---
 
 ## 13. Project Documentation
 
-The repository contains the relevant project documentation developed during the project, including:
+The repository may contain the academic and technical documents prepared during project development, including:
 
 - Project Proposal
 - Requirements Baseline
 - Requirements Documentation
 - Software Requirements Specification (SRS)
 - Project Planning Documents
-- Change Management Documentation
+- Software Change Management Documentation
 - Change Request Documents
 - Testing Documentation
+
+Only documents actually included in the repository should be listed as available files.
 
 ---
 
 ## 14. Project Purpose
 
-The purpose of this project is to demonstrate the development of a web-based **Ice Cream Shop E-Commerce Management System** using frontend, backend, database, and online payment technologies.
+The purpose of this project is to demonstrate the design and development of a web-based Ice Cream Shop E-Commerce Management System using frontend technologies, PHP, MySQL, and an online payment gateway.
 
-The system provides a simple platform for customers to browse and purchase ice cream products online while helping administrators manage products, stock quantities, categories, customers, and customer orders.
+The system aims to make ice cream shopping more convenient for customers while helping administrators manage products, categories, stock quantities, customer information, payments, and orders.
+
+The PayHere Sandbox integration demonstrates the online payment workflow in a controlled testing environment without charging real money.
 
 ---
 
@@ -392,13 +446,13 @@ The system provides a simple platform for customers to browse and purchase ice c
 
 **Student Name:** Ugatharsini Yoganathan
 
-**Project:** Ice Cream Shop E-Commerce Management System
+**Student ID:** JFICT24_33
+
+**Project Title:** Ice Cream Shop E-Commerce Management System
 
 **Project Type:** Individual Academic Project
 
 **Course / Programme:** HND in Information Technology
-
-**Student ID:** JFICT24_33
 
 **Institution:** University College of Jaffna
 
@@ -408,9 +462,11 @@ The system provides a simple platform for customers to browse and purchase ice c
 
 ## 16. Project Status
 
-**Project Status:** Final Project
+**Project Status:** Academic Project – Development and Testing
 
-This repository contains the source code, database-related files, documentation, and other relevant project materials for the **Ice Cream Shop E-Commerce Management System**.
+The repository contains the project source code, database-related files, documentation, and other relevant project materials.
+
+The completed features and payment integration should be verified through functional testing before the project is described as fully tested or complete.
 
 ---
 
@@ -418,4 +474,4 @@ This repository contains the source code, database-related files, documentation,
 
 **Ugatharsini Yoganathan**
 
-**Ice Cream Shop E-Commerce Management System**
+Ice Cream Shop E-Commerce Management System
