@@ -1,46 +1,117 @@
-<?php 
 
-require_once "config/auth.php"; 
+<?php
 
-if (!isset($_SESSION['user'])) { 
-    header("Location: login.php"); 
-    exit(); 
-} 
+require_once "config/auth.php";
 
-require_once "config/db.php"; 
-require_once "config/cart.php"; 
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
 
+require_once "config/db.php";
+require_once "config/cart.php";
 
-$stmt = $pdo->query(" 
-    SELECT 
-        p.*, 
-        c.name AS category_name 
-    FROM products p 
-    JOIN categories c 
-        ON p.category_id = c.id 
-    WHERE p.availability = 1 
-    ORDER BY p.id DESC 
-"); 
+// Get product search keyword
+$search = trim($_GET['search'] ?? '');
 
-$products = $stmt->fetchAll(); 
+// Fetch available products
+$sql = "
+    SELECT
+        p.*,
+        c.name AS category_name
+    FROM products p
+    JOIN categories c ON p.category_id = c.id
+    WHERE p.availability = 1
+";
 
-?> 
+$params = [];
 
-<!DOCTYPE html> 
-<html lang="en"> 
+if ($search !== '') {
+    $sql .= "
+        AND (
+            p.name LIKE :search_name
+            OR c.name LIKE :search_category
+            OR p.description LIKE :search_description
+        )
+    ";
 
-<head> 
+    $keyword = '%' . $search . '%';
 
-    <meta charset="UTF-8"> 
+    $params['search_name'] = $keyword;
+    $params['search_category'] = $keyword;
+    $params['search_description'] = $keyword;
+}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+$sql .= " ORDER BY p.id DESC";
 
-    <title>Ice Cream Shop</title> 
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 
-    <link rel="stylesheet" href="assets/style.css"> 
+$products = $stmt->fetchAll();
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ice Cream Shop</title>
+
+    <link rel="stylesheet" href="assets/style.css">
 
     <style>
+        /* Product search */
 
+        .product-search {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .product-search input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .product-search input:focus {
+            outline: none;
+            border-color: #ffbd59;
+            box-shadow: 0 0 5px rgba(255, 189, 89, 0.4);
+        }
+
+        .search-info {
+            margin: 15px 0 20px;
+            line-height: 1.6;
+        }
+
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 35px 20px;
+            border-radius: 10px;
+            background: #2b242b;
+            color: #ffffff;
+        }
+
+        .no-products h3 {
+            margin-bottom: 10px;
+        }
+
+        .no-products p {
+            margin-bottom: 18px;
+        }
+
+        /* Footer */
 
         .footer {
             background: #211a20;
@@ -83,259 +154,336 @@ $products = $stmt->fetchAll();
         }
 
         @media (max-width: 768px) {
-
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
 
-        }
+            .product-search {
+                flex-direction: column;
+            }
 
+            .product-search input {
+                width: 100%;
+            }
+        }
     </style>
 
-</head> 
+</head>
 
+<body>
 
-<body> 
+<!-- Navigation bar -->
 
-<nav class="navbar"> 
+<nav class="navbar">
 
-    <div class="logo"> 
-        🍦 Ice Cream Shop 
-    </div> 
+    <div class="logo">
+        🍦 Ice Cream Shop
+    </div>
 
+    <div class="nav-links">
 
-    <div class="nav-links"> 
+        <a href="index.php">
+            Home
+        </a>
 
-        <a href="index.php"> 
-            Home 
-        </a> 
+        <a href="cart.php">
+            Cart (<?= cartCount() ?>)
+        </a>
 
-        <a href="cart.php"> 
-            Cart (<?= cartCount() ?>) 
-        </a> 
+        <a href="customer/orders.php">
+            My Orders
+        </a>
 
-        <a href="customer/orders.php"> 
-            My Orders 
-        </a> 
+        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
 
+            <a href="admin/dashboard.php">
+                Admin
+            </a>
 
-        <?php if ($_SESSION['user']['role'] === 'admin'): ?> 
+        <?php endif; ?>
 
-            <a href="admin/dashboard.php"> 
-                Admin 
-            </a> 
+        <a href="logout.php">
+            Logout
+        </a>
 
-        <?php endif; ?> 
+    </div>
 
+</nav>
 
-        <a href="logout.php"> 
-            Logout 
-        </a> 
 
-    </div> 
+<!-- Main content -->
 
-</nav> 
+<div class="container">
 
+    <!-- Hero section -->
 
+    <section class="hero">
 
-<div class="container"> 
+        <h1>
+            Bing chung Ice Cream shop🍨
+        </h1>
 
+        <p>
+            Browse our delicious ice cream collection and order online.
+        </p>
 
-    <section class="hero"> 
+    </section>
 
-        <h1> 
-            Bing chung Ice Cream shop🍨 
-        </h1> 
 
-        <p> 
-            Browse our delicious ice cream collection and order online. 
-        </p> 
+    <!-- Product heading -->
 
-    </section> 
+    <h2>
+        Our Products
+    </h2>
 
 
-    <h2> 
-        Our Products 
-    </h2> 
+    <!-- Product search form -->
 
+    <form method="GET" action="index.php" class="product-search">
 
-    <div class="grid"> 
+        <input
+            type="search"
+            name="search"
+            placeholder="Search by product name, category or description..."
+            value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>"
+            aria-label="Search ice cream products"
+        >
 
+        <button type="submit" class="btn secondary">
+            🔍 Search
+        </button>
 
-        <?php foreach ($products as $p): ?> 
+        <?php if ($search !== ''): ?>
 
-            <div class="card"> 
- 
+            <a
+                href="index.php"
+                class="btn secondary"
+                style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;"
+            >
+                Clear
+            </a>
 
-                <?php if ((int)$p['stock_quantity'] > 0): ?> 
+        <?php endif; ?>
 
-                    <div style=" 
-                        font-size:14px; 
-                        font-weight:bold; 
-                        color:#7fe687; 
-                        margin-bottom:10px; 
-                        text-align:center; 
-                    "> 
+    </form>
 
-                        Available Stock: 
-                        <?= (int)$p['stock_quantity'] ?> 
 
-                    </div> 
+    <!-- Search results information -->
 
-                <?php else: ?> 
+    <div class="search-info">
 
-                    <div style=" 
-                        font-size:14px; 
-                        font-weight:bold; 
-                        color:#e06d75; 
-                        margin-bottom:10px; 
-                        text-align:center; 
-                    "> 
+        <?php if ($search !== ''): ?>
 
-                        Out of Stock 
+            <p>
+                Search results for
+                <strong><?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?></strong>:
+                <?= count($products) ?> product(s) found.
+            </p>
 
-                    </div> 
+        <?php else: ?>
 
-                <?php endif; ?> 
+            <p>
+                Browse our available ice cream products below.
+            </p>
 
+        <?php endif; ?>
 
-                <a 
-                    href="product.php?id=<?= $p['id'] ?>" 
-                    style=" 
-                        text-decoration:none; 
-                        display:block; 
-                    " 
-                > 
+    </div>
 
-                    <img 
-                        src="/ice_cream_shop/assets/images/<?= htmlspecialchars($p['image']) ?>" 
-                        alt="<?= htmlspecialchars($p['name']) ?>" 
-                        class="product-image" 
-                        onerror=" 
-                            this.onerror=null; 
-                            this.src='assets/images/default.jpg'; 
-                        " 
-                    > 
 
-                </a> 
+    <!-- Products grid -->
 
-                <h3> 
+    <div class="grid">
 
-                    <a 
-                        href="product.php?id=<?= $p['id'] ?>" 
-                        style=" 
-                            color:inherit; 
-                            text-decoration:none; 
-                        " 
-                    > 
+        <?php if (!empty($products)): ?>
 
-                        <?= htmlspecialchars($p['name']) ?> 
+            <?php foreach ($products as $p): ?>
 
-                    </a> 
+                <div class="card">
 
-                </h3> 
+                    <!-- Stock availability -->
 
+                    <?php if ((int)$p['stock_quantity'] > 0): ?>
 
-                <p> 
+                        <div style="
+                            font-size:14px;
+                            font-weight:bold;
+                            color:#7fe687;
+                            margin-bottom:10px;
+                            text-align:center;
+                        ">
 
-                    <?= htmlspecialchars($p['description']) ?> 
+                            Available Stock:
+                            <?= (int)$p['stock_quantity'] ?>
 
-                </p> 
+                        </div>
 
+                    <?php else: ?>
 
-                <p> 
+                        <div style="
+                            font-size:14px;
+                            font-weight:bold;
+                            color:#e06d75;
+                            margin-bottom:10px;
+                            text-align:center;
+                        ">
 
-                    Category: 
+                            Out of Stock
 
-                    <?= htmlspecialchars($p['category_name']) ?> 
+                        </div>
 
-                </p> 
+                    <?php endif; ?>
 
 
+                    <!-- Product image -->
 
-                <p class="price"> 
+                    <a
+                        href="product.php?id=<?= (int)$p['id'] ?>"
+                        style="text-decoration:none; display:block;"
+                    >
 
-                    Rs. 
-                    <?= number_format($p['price'], 2) ?> 
+                        <img
+                            src="/ice_cream_shop/assets/images/<?= htmlspecialchars($p['image'], ENT_QUOTES, 'UTF-8') ?>"
+                            alt="<?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?>"
+                            class="product-image"
+                            onerror="this.onerror=null; this.src='assets/images/default.jpg';"
+                        >
 
-                </p> 
- 
+                    </a>
 
-                <div class="actions"> 
 
-                    <?php if ((int)$p['stock_quantity'] > 0): ?> 
+                    <!-- Product name -->
 
-                        <form 
-                            method="post" 
-                            action="cart.php" 
-                        > 
+                    <h3>
 
-                            <input 
-                                type="hidden" 
-                                name="action" 
-                                value="add" 
-                            > 
+                        <a
+                            href="product.php?id=<?= (int)$p['id'] ?>"
+                            style="color:inherit; text-decoration:none;"
+                        >
 
-                            <input 
-                                type="hidden" 
-                                name="product_id" 
-                                value="<?= $p['id'] ?>" 
-                            > 
+                            <?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?>
 
-                            <button 
-                                type="submit" 
-                                class="btn secondary" 
-                            > 
+                        </a>
 
-                                Add to Cart 
+                    </h3>
 
-                            </button> 
 
-                        </form> 
+                    <!-- Product description -->
 
-                    <?php else: ?> 
+                    <p>
+                        <?= htmlspecialchars($p['description'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                    </p>
 
-                        <button 
-                            type="button" 
-                            class="btn secondary" 
-                            disabled 
-                            style=" 
-                                opacity:0.5; 
-                                cursor:not-allowed; 
-                            " 
-                        > 
 
-                            Out of Stock 
+                    <!-- Product category -->
 
-                        </button> 
+                    <p>
+                        Category:
+                        <?= htmlspecialchars($p['category_name'], ENT_QUOTES, 'UTF-8') ?>
+                    </p>
 
-                    <?php endif; ?> 
 
-                </div> 
+                    <!-- Product price -->
 
+                    <p class="price">
 
-            </div> 
+                        Rs.
+                        <?= number_format((float)$p['price'], 2) ?>
 
-        <?php endforeach; ?> 
+                    </p>
 
 
-    </div> 
+                    <!-- Add to cart -->
 
+                    <div class="actions">
 
-</div> 
+                        <?php if ((int)$p['stock_quantity'] > 0): ?>
 
+                            <form method="post" action="cart.php">
 
+                                <input
+                                    type="hidden"
+                                    name="action"
+                                    value="add"
+                                >
 
+                                <input
+                                    type="hidden"
+                                    name="product_id"
+                                    value="<?= (int)$p['id'] ?>"
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="btn secondary"
+                                >
+                                    Add to Cart
+                                </button>
+
+                            </form>
+
+                        <?php else: ?>
+
+                            <button
+                                type="button"
+                                class="btn secondary"
+                                disabled
+                                style="opacity:0.5; cursor:not-allowed;"
+                            >
+                                Out of Stock
+                            </button>
+
+                        <?php endif; ?>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        <?php else: ?>
+
+            <!-- No matching products -->
+
+            <div class="no-products">
+
+                <h3>
+                    No products found 🍦
+                </h3>
+
+                <p>
+                    Try another product name or category.
+                </p>
+
+                <a
+                    href="index.php"
+                    class="btn secondary"
+                    style="text-decoration:none;"
+                >
+                    View All Products
+                </a>
+
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
 
 <footer class="footer">
 
     <div class="footer-container">
 
-
         <div class="footer-section">
 
-            <h3>Bing chung Ice Cream shop 🍨</h3>
+            <h3>
+                Bing chung Ice Cream shop 🍨
+            </h3>
 
             <p>
                 Ice Cream Shop E-Commerce Management System
@@ -351,7 +499,9 @@ $products = $stmt->fetchAll();
 
         <div class="footer-section">
 
-            <h3>Contact Us</h3>
+            <h3>
+                Contact Us
+            </h3>
 
             <p>
                 📧 Admin:
@@ -373,7 +523,9 @@ $products = $stmt->fetchAll();
 
         <div class="footer-section">
 
-            <h3>Opening Hours</h3>
+            <h3>
+                Opening Hours
+            </h3>
 
             <p>
                 Monday - Saturday
@@ -393,7 +545,6 @@ $products = $stmt->fetchAll();
 
         </div>
 
-
     </div>
 
 
@@ -411,7 +562,6 @@ $products = $stmt->fetchAll();
 
 </footer>
 
-
-</body> 
+</body>
 
 </html>
