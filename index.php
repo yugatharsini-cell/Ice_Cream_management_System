@@ -221,7 +221,7 @@ $products = $stmt->fetchAll();
     <section class="hero">
 
         <h1>
-            Bing chung Ice Cream shop🍨
+             Ice Cream shop🍨
         </h1>
 
         <p>
@@ -515,7 +515,7 @@ $products = $stmt->fetchAll();
 
             <p>
                 📍 Address:
-                Bing chung Ice Cream shop 🍨, Jaffna, Sri Lanka
+                Ice Cream shop 🍨, Jaffna, Sri Lanka
             </p>
 
         </div>
