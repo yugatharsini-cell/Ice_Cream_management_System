@@ -482,7 +482,7 @@ $products = $stmt->fetchAll();
         <div class="footer-section">
 
             <h3>
-                Bing chung Ice Cream shop 🍨
+                Ice Cream shop 🍨
             </h3>
 
             <p>
