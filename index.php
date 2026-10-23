@@ -1,4 +1,3 @@
-
 <?php
 
 require_once "config/auth.php";
@@ -64,6 +63,13 @@ $products = $stmt->fetchAll();
     <link rel="stylesheet" href="assets/style.css">
 
     <style>
+        /* Logged-in user name in navbar */
+
+        .nav-user {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
         /* Product search */
 
         .product-search {
@@ -202,6 +208,12 @@ $products = $stmt->fetchAll();
             </a>
 
         <?php endif; ?>
+
+        <!-- Logged-in customer name -->
+
+        <span class="nav-user">
+            Hi, <?= htmlspecialchars($_SESSION['user']['name'], ENT_QUOTES, 'UTF-8') ?>
+        </span>
 
         <a href="logout.php">
             Logout

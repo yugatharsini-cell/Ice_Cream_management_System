@@ -59,6 +59,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="nav-links">
         <a href="index.php">Home</a>
+
+        <?php if (!empty($_SESSION['user'])): ?>
+
+            <span class="nav-user">Hi, <?= e($_SESSION['user']['name']) ?></span>
+            <a href="logout.php">Logout</a>
+
+        <?php else: ?>
+
+            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
+
+        <?php endif; ?>
     </div>
 
 </nav>

@@ -224,6 +224,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         href="assets/style.css"
     >
 
+    <style>
+        /* Logged-in user name in navbar */
+
+        .nav-user {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    </style>
+
 </head>
 
 
@@ -237,9 +246,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 
-    <a href="cart.php">
-        Back to Cart
-    </a>
+    <div class="nav-links">
+
+        <a href="cart.php">
+            Back to Cart
+        </a>
+
+        <span class="nav-user">
+            Hi, <?= e($_SESSION['user']['name']) ?>
+        </span>
+
+        <a href="logout.php">
+            Logout
+        </a>
+
+    </div>
 
 </nav>
 

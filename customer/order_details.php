@@ -73,6 +73,15 @@ $items = $stmt->fetchAll();
         href="../assets/style.css"
     >
 
+    <style>
+        /* Logged-in user name in navbar */
+
+        .nav-user {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -85,14 +94,24 @@ $items = $stmt->fetchAll();
             🍦 Order Details
         </div>
 
-        <a href="orders.php">
-            My Orders
-        </a>
+        <div class="nav-links">
+
+            <a href="orders.php">
+                My Orders
+            </a>
+
+            <span class="nav-user">
+                Hi, <?= e($_SESSION['user']['name']) ?>
+            </span>
+
+            <a href="../logout.php">
+                Logout
+            </a>
+
+        </div>
 
     </nav>
 
-
-    >
 
     <div class="container">
 

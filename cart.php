@@ -126,6 +126,15 @@ if ($_SESSION['cart']) {
         href="assets/style.css"
     >
 
+    <style>
+        /* Logged-in user name in navbar */
+
+        .nav-user {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -139,9 +148,31 @@ if ($_SESSION['cart']) {
             🍦 Ice Cream Shop
         </div>
 
-        <a href="index.php">
-            Continue Shopping
-        </a>
+        <div class="nav-links">
+
+            <a href="index.php">
+                Continue Shopping
+            </a>
+
+            <?php if (!empty($_SESSION['user'])): ?>
+
+                <span class="nav-user">
+                    Hi, <?= e($_SESSION['user']['name']) ?>
+                </span>
+
+                <a href="logout.php">
+                    Logout
+                </a>
+
+            <?php else: ?>
+
+                <a href="login.php">
+                    Login
+                </a>
+
+            <?php endif; ?>
+
+        </div>
 
     </nav>
 

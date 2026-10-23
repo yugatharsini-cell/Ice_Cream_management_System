@@ -40,6 +40,15 @@ $orders = $stmt->fetchAll();
         href="../assets/style.css"
     >
 
+    <style>
+        /* Logged-in user name in navbar */
+
+        .nav-user {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -53,9 +62,21 @@ $orders = $stmt->fetchAll();
             🍦 My Orders
         </div>
 
-        <a href="../index.php">
-            Home
-        </a>
+        <div class="nav-links">
+
+            <a href="../index.php">
+                Home
+            </a>
+
+            <span class="nav-user">
+                Hi, <?= e($_SESSION['user']['name']) ?>
+            </span>
+
+            <a href="../logout.php">
+                Logout
+            </a>
+
+        </div>
 
     </nav>
 
